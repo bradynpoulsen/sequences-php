@@ -55,7 +55,7 @@ interface Sequence extends IteratorAggregate
      * @effect intermediate
      * @state stateless
      *
-     * @param callable $transform (T) -> R
+     * @param callable $transform (T [, int $index]) -> R
      *
      * @return Sequence Sequence<T> -> Sequence<R>
      */

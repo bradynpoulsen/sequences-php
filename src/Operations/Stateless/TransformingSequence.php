@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace BradynPoulsen\Sequences\Operations\Stateless;
 
+use BradynPoulsen\Sequences\DeferredIterator;
 use BradynPoulsen\Sequences\Sequence;
 use BradynPoulsen\Sequences\Traits\CommonOperationsTrait;
+use Generator;
 use Traversable;
 
 /**
@@ -33,9 +35,12 @@ final class TransformingSequence implements Sequence
 
     public function getIterator(): Traversable
     {
-        $elements = $this->previous->getIterator();
-        foreach ($elements as $element) {
-            yield call_user_func($this->transform, $element);
-        }
+        return new DeferredIterator(function (): Generator {
+            $index = 0;
+            $elements = $this->previous->getIterator();
+            foreach ($elements as $element) {
+                yield call_user_func($this->transform, $element, $index++);
+            }
+        });
     }
 }
