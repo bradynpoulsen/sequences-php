@@ -4,7 +4,7 @@
     "type": "library",
     "license": "Apache 2.0",
     "require": {
-        "php": "^7.0"
+        "php": "^7.1"
     },
     "require-dev": {
         "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
@@ -14,7 +14,12 @@
         "squizlabs/php_codesniffer": "^3.5"
     },
     "autoload": {
-        "BradynPoulsen\\Sequences\\": "src"
+        "psr-4": {
+            "BradynPoulsen\\Sequences\\": "src"
+        },
+        "files": [
+            "src/builders.php"
+        ]
     },
     "scripts": {
         "test": "vendor/bin/phpunit",

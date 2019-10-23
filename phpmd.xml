@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ruleset xmlns = "http://pmd.sf.net/ruleset/1.0.0">
-    <rule ref="rulesets/cleancode.xml" />
+    <rule ref="rulesets/cleancode.xml">
+        <exclude name="StaticAccess" />
+    </rule>
+    <rule ref="rulesets/cleancode.xml/StaticAccess">
+        <properties>
+            <property name="exceptions" value="
+                \Closure
+            " />
+        </properties>
+    </rule>
     <rule ref="rulesets/codesize.xml">
         <exclude name="TooManyPublicMethods" />
         <exclude name="TooManyMethods" />
