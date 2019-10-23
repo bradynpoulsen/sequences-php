@@ -38,6 +38,26 @@ interface Sequence extends IteratorAggregate
     public function getIterator(): Traversable;
 
     /**
+     * Returns `true` if all elements match the given $predicate.
+     *
+     * @effect terminal
+     *
+     * @param callable $predicate (T) -> bool
+     * @return bool Sequence<T> -> bool
+     */
+    public function all(callable $predicate): bool;
+
+    /**
+     * Returns `true` if at least one element matches the given $predicate. If no $predicate is specified, returns
+     * `true` if this sequence contains at least one element.
+     *
+     * @param callable|null $predicate (T) -> bool
+     *
+     * @return bool Sequence<T> -> bool
+     */
+    public function any(?callable $predicate = null): bool;
+
+    /**
      * Returns a wrapper {@see Sequence} that provides values of this sequence, but ensures it can be iterated only
      * one time.
      *
@@ -82,4 +102,14 @@ interface Sequence extends IteratorAggregate
      * @return Sequence Sequence<T> -> Sequence<R>
      */
     public function map(callable $transform): Sequence;
+
+    /**
+     * Returns `true` if no element matches the given $predicate. If no $predicate is specified, returns `true` if
+     * this sequence contains no elements.
+     *
+     * @param callable|null $predicate (T) -> bool
+     *
+     * @return bool Sequence<T> -> bool
+     */
+    public function none(?callable $predicate = null): bool;
 }
