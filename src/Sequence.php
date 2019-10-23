@@ -47,4 +47,17 @@ interface Sequence extends IteratorAggregate
      * @return Sequence Sequence<T> -> Sequence<T>
      */
     public function constrainOnce(): Sequence;
+
+    /**
+     * Returns a sequence containing the results of applying the given $transform function to each element of
+     * this sequence.
+     *
+     * @effect intermediate
+     * @state stateless
+     *
+     * @param callable $transform (T) -> R
+     *
+     * @return Sequence Sequence<T> -> Sequence<R>
+     */
+    public function map(callable $transform): Sequence;
 }
