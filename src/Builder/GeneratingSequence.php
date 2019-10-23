@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BradynPoulsen\Sequences\Builder;
 
 use BradynPoulsen\Sequences\Sequence;
+use BradynPoulsen\Sequences\Traits\CommonOperationsTrait;
 use InvalidArgumentException;
 use Traversable;
 
@@ -15,13 +16,17 @@ use function BradynPoulsen\Sequences\sequenceFrom;
  */
 final class GeneratingSequence implements Sequence
 {
+    use CommonOperationsTrait;
+
     /**
-     * @var callable
+     * @var callable () -> Traversable
      */
     private $factory;
 
     /**
      * Use {@see sequenceFrom()} instead.
+     *
+     * @param callable $factory () -> Traversable
      *
      * @deprecated Use sequenceFrom() instead.
      */

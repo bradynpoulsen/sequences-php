@@ -6,6 +6,7 @@ namespace BradynPoulsen\Sequences\Builder;
 
 use ArrayIterator;
 use BradynPoulsen\Sequences\Sequence;
+use BradynPoulsen\Sequences\Traits\CommonOperationsTrait;
 use Traversable;
 
 use function BradynPoulsen\Sequences\sequenceOf;
@@ -15,6 +16,8 @@ use function BradynPoulsen\Sequences\sequenceOf;
  */
 final class StaticSequence implements Sequence
 {
+    use CommonOperationsTrait;
+
     /**
      * @var array
      */

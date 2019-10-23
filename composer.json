@@ -26,7 +26,8 @@
         "unit": "vendor/bin/phpunit --testsuite unit",
         "integration": "vendor/bin/phpunit --testsuite integration",
         "md": "vendor/bin/phpmd src text phpmd.xml",
-        "cs": "vendor/bin/phpcs --standard=phpcs.xml"
+        "cs": "vendor/bin/phpcs --standard=phpcs.xml",
+        "cbf": "vendor/bin/phpcbf --standard=phpcs.xml"
     },
     "config": {
         "sort-packages": true

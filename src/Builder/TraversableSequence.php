@@ -6,6 +6,7 @@ namespace BradynPoulsen\Sequences\Builder;
 
 use BradynPoulsen\Sequences\Sequence;
 use BradynPoulsen\Sequences\SequenceAlreadyIteratedException;
+use BradynPoulsen\Sequences\Traits\CommonOperationsTrait;
 use Traversable;
 
 use function BradynPoulsen\Sequences\sequenceFrom;
@@ -15,6 +16,8 @@ use function BradynPoulsen\Sequences\sequenceFrom;
  */
 final class TraversableSequence implements Sequence
 {
+    use CommonOperationsTrait;
+
     /**
      * @var Traversable|null
      */
