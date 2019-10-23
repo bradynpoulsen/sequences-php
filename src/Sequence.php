@@ -36,4 +36,15 @@ interface Sequence extends IteratorAggregate
      *      {@see Sequence::getIterator()} is invoked a second time.
      */
     public function getIterator(): Traversable;
+
+    /**
+     * Returns a wrapper {@see Sequence} that provides values of this sequence, but ensures it can be iterated only
+     * one time.
+     *
+     * @effect intermediate
+     * @state stateless
+     *
+     * @return Sequence Sequence<T> -> Sequence<T>
+     */
+    public function constrainOnce(): Sequence;
 }
