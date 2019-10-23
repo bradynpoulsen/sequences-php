@@ -28,4 +28,16 @@ trait StatelessOperationsTrait
     {
         return new TransformingSequence($this, $transform);
     }
+
+    /**
+     * @see Sequence::onEach()
+     */
+    public function onEach(callable $action): Sequence
+    {
+        assert($this instanceof Sequence);
+        return $this->map(function ($element) use ($action) {
+            call_user_func($action, $element);
+            return $element;
+        });
+    }
 }

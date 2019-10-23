@@ -112,4 +112,13 @@ interface Sequence extends IteratorAggregate
      * @return bool Sequence<T> -> bool
      */
     public function none(?callable $predicate = null): bool;
+
+    /**
+     * Returns a sequence which performs the given $action on each element of the original sequence.
+     *
+     * @param callable $action (T) -> void
+     *
+     * @return Sequence Sequence<T> -> Sequence<T>
+     */
+    public function onEach(callable $action): Sequence;
 }
