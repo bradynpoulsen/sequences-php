@@ -51,6 +51,8 @@ interface Sequence extends IteratorAggregate
      * Returns `true` if at least one element matches the given $predicate. If no $predicate is specified, returns
      * `true` if this sequence contains at least one element.
      *
+     * @effect terminal
+     *
      * @param callable|null $predicate (T) -> bool
      *
      * @return bool Sequence<T> -> bool
@@ -107,6 +109,8 @@ interface Sequence extends IteratorAggregate
      * Returns `true` if no element matches the given $predicate. If no $predicate is specified, returns `true` if
      * this sequence contains no elements.
      *
+     * @effect terminal
+     *
      * @param callable|null $predicate (T) -> bool
      *
      * @return bool Sequence<T> -> bool
@@ -115,6 +119,9 @@ interface Sequence extends IteratorAggregate
 
     /**
      * Returns a sequence which performs the given $action on each element of the original sequence.
+     *
+     * @effect intermediate
+     * @state stateless
      *
      * @param callable $action (T) -> void
      *
