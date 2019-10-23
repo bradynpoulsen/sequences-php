@@ -49,6 +49,28 @@ interface Sequence extends IteratorAggregate
     public function constrainOnce(): Sequence;
 
     /**
+     * Returns a sequence contain all elements of this sequence that match the provided $predicate.
+     *
+     * @effect intermediate
+     * @state stateful
+     *
+     * @param callable $predicate (T [, int $indexed]) -> bool
+     * @return Sequence Sequence<T> -> Sequence<T>
+     */
+    public function filter(callable $predicate): Sequence;
+
+    /**
+     * Returns a sequence contain all elements of this sequence that DO NOT match the provided $predicate.
+     *
+     * @effect intermediate
+     * @state stateful
+     *
+     * @param callable $predicate (T [, int $indexed]) -> bool
+     * @return Sequence Sequence<T> -> Sequence<T>
+     */
+    public function filterNot(callable $predicate): Sequence;
+
+    /**
      * Returns a sequence containing the results of applying the given $transform function to each element of
      * this sequence.
      *
