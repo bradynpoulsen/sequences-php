@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BradynPoulsen\Sequences;
 
+use BradynPoulsen\Sequences\Builder\EmptySequence;
 use BradynPoulsen\Sequences\Builder\GeneratingSequence;
 use BradynPoulsen\Sequences\Builder\StaticSequence;
 use BradynPoulsen\Sequences\Builder\TraversableSequence;
@@ -11,6 +12,16 @@ use Closure;
 use InvalidArgumentException;
 use Iterator;
 use IteratorAggregate;
+
+/**
+ * Creates an empty sequence.
+ *
+ * @return Sequence
+ */
+function emptySequence(): Sequence
+{
+    return new EmptySequence();
+}
 
 /**
  * Creates a sequence from the provided {@see Iterator}, {@see IteratorAggregate}, or {@see callable} () -> Traversable.
