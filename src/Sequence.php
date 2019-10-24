@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BradynPoulsen\Sequences;
 
+use InvalidArgumentException;
 use IteratorAggregate;
 use Traversable;
 
@@ -128,4 +129,28 @@ interface Sequence extends IteratorAggregate
      * @return Sequence Sequence<T> -> Sequence<T>
      */
     public function onEach(callable $action): Sequence;
+
+    /**
+     * Returns a sequence which validates each element matches the given $predicate.
+     * {@see InvalidArgumentException} will be thrown if an element does not match the given $predicate.
+     *
+     * @effect intermediate
+     * @state stateless
+     *
+     * @param callable $predicate (T) -> bool
+     * @return Sequence Sequence<T> -> Sequence<T>
+     */
+    public function require(callable $predicate): Sequence;
+
+    /**
+     * Returns a sequence which validates each element does not match the given $predicate.
+     * {@see InvalidArgumentException} will be thrown if an element matches the given $predicate.
+     *
+     * @effect intermediate
+     * @state stateless
+     *
+     * @param callable $predicate (T) -> bool
+     * @return Sequence Sequence<T> -> Sequence<T>
+     */
+    public function requireNot(callable $predicate): Sequence;
 }
