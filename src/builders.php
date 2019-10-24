@@ -7,7 +7,6 @@ namespace BradynPoulsen\Sequences;
 use BradynPoulsen\Sequences\Builder\EmptySequence;
 use BradynPoulsen\Sequences\Builder\GeneratingSequence;
 use BradynPoulsen\Sequences\Builder\StaticSequence;
-use BradynPoulsen\Sequences\Builder\TraversableSequence;
 use Closure;
 use InvalidArgumentException;
 use Iterator;
@@ -35,7 +34,10 @@ function sequenceFrom($source): Sequence
     if ($source instanceof Sequence) {
         return $source;
     } elseif ($source instanceof Iterator) {
-        return new TraversableSequence($source);
+        $sequence = new GeneratingSequence(function () use ($source): Iterator {
+            return $source;
+        });
+        return $sequence->constrainOnce();
     } elseif ($source instanceof IteratorAggregate) {
         return new GeneratingSequence(Closure::fromCallable([$source, 'getIterator']));
     } elseif (is_callable($source)) {

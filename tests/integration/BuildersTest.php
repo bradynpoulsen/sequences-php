@@ -12,12 +12,17 @@ use PHPUnit\Framework\TestCase;
 use function BradynPoulsen\Sequences\sequenceFrom;
 use function BradynPoulsen\Sequences\sequenceOf;
 
+/**
+ * @covers ::\BradynPoulsen\Sequences\sequenceFrom()
+ * @covers ::\BradynPoulsen\Sequences\sequenceOf()
+ * @covers \BradynPoulsen\Sequences\Builder\GeneratingSequence
+ * @covers \BradynPoulsen\Sequences\Operations\Stateless\ConstrainedOnceSequence
+ * @covers \BradynPoulsen\Sequences\Traits\StatelessOperationsTrait
+ */
 final class BuildersTest extends TestCase
 {
     /**
      * @test
-     * @covers ::sequenceFrom()
-     * @covers \BradynPoulsen\Sequences\Builder\GeneratingSequence
      */
     public function sequenceFrom_with_generator_function(): void
     {
@@ -32,8 +37,6 @@ final class BuildersTest extends TestCase
 
     /**
      * @test
-     * @covers ::sequenceFrom()
-     * @covers \BradynPoulsen\Sequences\Builder\TraversableSequence
      */
     public function sequenceFrom_iterator(): void
     {
@@ -43,8 +46,6 @@ final class BuildersTest extends TestCase
 
     /**
      * @test
-     * @covers ::sequenceFrom()
-     * @covers \BradynPoulsen\Sequences\Builder\TraversableSequence
      */
     public function sequenceFrom_iterator_fails_on_second_iteration(): void
     {
@@ -58,8 +59,6 @@ final class BuildersTest extends TestCase
 
     /**
      * @test
-     * @covers ::sequenceFrom()
-     * @covers \BradynPoulsen\Sequences\Builder\GeneratingSequence
      */
     public function sequenceFrom_iteratorAggregate(): void
     {
@@ -79,8 +78,6 @@ final class BuildersTest extends TestCase
 
     /**
      * @test
-     * @covers ::sequenceOf()
-     * @covers \BradynPoulsen\Sequences\Builder\StaticSequence
      */
     public function sequenceOf_static_set_of_numbers(): void
     {

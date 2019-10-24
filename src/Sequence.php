@@ -74,6 +74,8 @@ interface Sequence extends IteratorAggregate
     /**
      * Returns a sequence contain all elements of this sequence that match the provided $predicate.
      *
+     * The index of an element may be obtained by accepting a 2nd argument in the $predicate function.
+     *
      * @effect intermediate
      * @state stateful
      *
@@ -84,6 +86,8 @@ interface Sequence extends IteratorAggregate
 
     /**
      * Returns a sequence contain all elements of this sequence that DO NOT match the provided $predicate.
+     *
+     * The index of an element may be obtained by accepting a 2nd argument in the $predicate function.
      *
      * @effect intermediate
      * @state stateful
@@ -96,6 +100,8 @@ interface Sequence extends IteratorAggregate
     /**
      * Returns a sequence containing the results of applying the given $transform function to each element of
      * this sequence.
+     *
+     * The index of an element may be obtained by accepting a 2nd argument in the $transform function.
      *
      * @effect intermediate
      * @state stateless
