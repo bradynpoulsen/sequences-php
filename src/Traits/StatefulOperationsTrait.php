@@ -21,6 +21,6 @@ trait StatefulOperationsTrait
      */
     public function filterNot(callable $predicate): Sequence
     {
-        return new FilteringSequence($this, $predicate, false);
+        return new FilteringSequence($this, $predicate, FilteringSequence::SEND_WHEN_FALSE);
     }
 }

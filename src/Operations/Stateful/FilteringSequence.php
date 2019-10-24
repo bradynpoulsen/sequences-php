@@ -18,6 +18,9 @@ final class FilteringSequence implements Sequence
 {
     use CommonOperationsTrait;
 
+    public const SEND_WHEN_TRUE = 0;
+    public const SEND_WHEN_FALSE = 1;
+
     /**
      * @var Sequence
      */
@@ -33,19 +36,14 @@ final class FilteringSequence implements Sequence
      */
     private $sendWhen;
 
-    /**
-     * @var bool
-     */
-    private $includeIndex;
-
     public function __construct(
         Sequence $previous,
         callable $predicate,
-        bool $sendWhen = true
+        int $sendWhen = self::SEND_WHEN_TRUE
     ) {
         $this->previous = $previous;
         $this->predicate = $predicate;
-        $this->sendWhen = $sendWhen;
+        $this->sendWhen = self::SEND_WHEN_TRUE === $sendWhen;
     }
 
     public function getIterator(): Traversable
