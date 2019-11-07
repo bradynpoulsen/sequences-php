@@ -11,6 +11,8 @@ use Generator;
 use InvalidArgumentException;
 use Traversable;
 
+use function BradynPoulsen\Sequences\emptySequence;
+
 /**
  * @internal
  */
@@ -29,8 +31,8 @@ final class TakeSequence implements Sequence
 
     public function __construct(Sequence $previous, int $count)
     {
-        if ($count <= 0) {
-            throw new InvalidArgumentException("count must be greater than zero");
+        if ($count < 0) {
+            throw new InvalidArgumentException("count must be greater than or equal to zero");
         }
 
         $this->previous = $previous;
@@ -51,5 +53,19 @@ final class TakeSequence implements Sequence
             }
             $previous = null;
         });
+    }
+
+    public function drop(int $count): Sequence
+    {
+        return $count >= $this->count
+            ? emptySequence()
+            : new TakeSequence($this->previous, $this->count - $count);
+    }
+
+    public function take(int $count): Sequence
+    {
+        return $count >= $this->count
+            ? $this
+            : new TakeSequence($this->previous, $count);
     }
 }
