@@ -10,6 +10,7 @@ use BradynPoulsen\Sequences\Operations\Stateless\{
     DropSequence,
     FlatteningSequence,
     MergingSequence,
+    TakeSequence,
     TransformingSequence
 };
 use BradynPoulsen\Sequences\Sequence;
@@ -116,5 +117,13 @@ trait StatelessOperationsTrait
             }
             return $element;
         });
+    }
+
+    /**
+     * @see Sequence::take()
+     */
+    public function take(int $count): Sequence
+    {
+        return new TakeSequence($this, $count);
     }
 }

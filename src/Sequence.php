@@ -346,6 +346,16 @@ interface Sequence extends IteratorAggregate
     public function sortedWithDescending(callable $comparator): Sequence;
 
     /**
+     * Returns a sequence containing first $count elements.
+     *
+     * @effect intermediate
+     * @state stateless
+     *
+     * @return Sequence
+     */
+    public function take(int $count): Sequence;
+
+    /**
      * Returns a sequence of results of applying the given $transform function to arrays that represent a window
      * of the given $size sliding along this sequence with the given $step.
      *
