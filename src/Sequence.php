@@ -191,6 +191,17 @@ interface Sequence extends IteratorAggregate
     public function map(callable $transform): Sequence;
 
     /**
+     * Returns a sequence containing all elements of original sequence except the given $elements.
+     *
+     * @effect intermediate
+     * @state stateful
+     *
+     * @param iterable $elements iterable<B>
+     * @return Sequence Sequence<A|B> -> Sequence<A>
+     */
+    public function minus(iterable $elements): Sequence;
+
+    /**
      * Returns `true` if no element matches the given $predicate. If no $predicate is specified, returns `true` if
      * this sequence contains no elements.
      *

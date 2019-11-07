@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BradynPoulsen\Sequences\Traits;
 
+use BradynPoulsen\Sequences\Builder\GeneratingSequence;
 use BradynPoulsen\Sequences\SequenceOptions;
 use BradynPoulsen\Sequences\Operations\Stateful\{
     DistinctSequence,
@@ -12,6 +13,8 @@ use BradynPoulsen\Sequences\Operations\Stateful\{
     WindowedSequence
 };
 use BradynPoulsen\Sequences\Sequence;
+use Iterator;
+use Traversable;
 
 trait StatefulOperationsTrait
 {
@@ -65,6 +68,20 @@ trait StatefulOperationsTrait
     public function filterNot(callable $predicate): Sequence
     {
         return new FilteringSequence($this, $predicate, FilteringSequence::SEND_WHEN_FALSE);
+    }
+
+    /**
+     * @see Sequence::minus()
+     */
+    public function minus(iterable $elements): Sequence
+    {
+        $sequence = new GeneratingSequence(function () use ($elements): Traversable {
+            $other = is_array($elements) ? $elements : iterator_to_array($elements);
+            return $this->filterNot(function ($element) use ($other): bool {
+                return in_array($element, $other);
+            })->getIterator();
+        });
+        return $elements instanceof Iterator ? $sequence->constrainOnce() : $sequence;
     }
 
     /**
