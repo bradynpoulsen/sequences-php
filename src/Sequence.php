@@ -72,6 +72,20 @@ interface Sequence extends IteratorAggregate
     public function constrainOnce(): Sequence;
 
     /**
+     * Splits this sequence into a sequence of arrays each not exceeding the given $size.
+     *
+     * The last list in the resulting sequence may have less elements than the given $size.
+     *
+     * @effect intermediate
+     * @state stateful
+     *
+     * @param callable|null $transform (T[] chunk) -> R
+     *
+     * @return Sequence Sequence<T> -> Sequence<R>
+     */
+    public function chunked(int $size, ?callable $transform = null): Sequence;
+
+    /**
      * Returns a sequence contain all elements of this sequence that match the provided $predicate.
      *
      * The index of an element may be obtained by accepting a 2nd argument in the $predicate function.
@@ -159,4 +173,28 @@ interface Sequence extends IteratorAggregate
      * @return Sequence Sequence<T> -> Sequence<T>
      */
     public function requireNot(callable $predicate): Sequence;
+
+    /**
+     * Returns a sequence of results of applying the given $transform function to arrays that represent a window
+     * of the given $size sliding along this sequence with the given $step.
+     *
+     * @effect intermediate
+     * @state stateful
+     *
+     * @param int $size the number of elements to take in each window, must be positive
+     * @param int $step the number of elements to move the window forward by on each step, must be positive
+     * @param bool $partialWindows whether or not to keep partial windows in the end, if any
+     * @param callable|null $transform (T[] $window) -> R defaults to returning the window as an array
+     *
+     * @return Sequence Sequence<T> -> Sequence<R>
+     *
+     * @see SequenceOptions::INCLUDE_PARTIAL_WINDOWS
+     * @see SequenceOptions::NO_PARTIAL_WINDOWS
+     */
+    public function windowed(
+        int $size,
+        int $step = 1,
+        bool $partialWindows = SequenceOptions::NO_PARTIAL_WINDOWS,
+        ?callable $transform = null
+    ): Sequence;
 }

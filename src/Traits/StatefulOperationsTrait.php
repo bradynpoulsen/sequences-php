@@ -6,7 +6,8 @@ namespace BradynPoulsen\Sequences\Traits;
 
 use BradynPoulsen\Sequences\SequenceOptions;
 use BradynPoulsen\Sequences\Operations\Stateful\{
-    FilteringSequence
+    FilteringSequence,
+    WindowedSequence
 };
 use BradynPoulsen\Sequences\Sequence;
 
@@ -34,5 +35,23 @@ trait StatefulOperationsTrait
     public function filterNot(callable $predicate): Sequence
     {
         return new FilteringSequence($this, $predicate, FilteringSequence::SEND_WHEN_FALSE);
+    }
+
+    /**
+     * @see Sequence::windowed()
+     */
+    public function windowed(
+        int $size,
+        int $step = 1,
+        bool $partialWindows = SequenceOptions::NO_PARTIAL_WINDOWS,
+        ?callable $transform = null
+    ): Sequence {
+        $sequence = new WindowedSequence(
+            $this,
+            $size,
+            $step,
+            $partialWindows
+        );
+        return $transform !== null ? $sequence->map($transform) : $sequence;
     }
 }
