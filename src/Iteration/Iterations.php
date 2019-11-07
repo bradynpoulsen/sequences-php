@@ -38,13 +38,20 @@ final class Iterations
      */
     public static function buildLinked(Traversable $previous, callable $builder): Iteration
     {
-        return new ComputingIteration($builder, self::convert($previous));
+        return new ComputingIteration($builder, self::fromTraversable($previous));
     }
 
-    private static function convert(Traversable $source): Iteration
+    /**
+     * Adapt the given $source traversable into an {@see Iteration}.
+     *
+     * @param Traversable $source
+     *
+     * @return Iteration
+     */
+    public static function fromTraversable(Traversable $source): Iteration
     {
         if ($source instanceof IteratorAggregate) {
-            return self::convert($source->getIterator());
+            return self::fromTraversable($source->getIterator());
         } elseif ($source instanceof Iteration) {
             return $source;
         }
