@@ -8,6 +8,7 @@ use BradynPoulsen\Sequences\SequenceOptions;
 use BradynPoulsen\Sequences\Operations\Stateful\{
     DistinctSequence,
     FilteringSequence,
+    SortingSequence,
     WindowedSequence
 };
 use BradynPoulsen\Sequences\Sequence;
@@ -64,6 +65,54 @@ trait StatefulOperationsTrait
     public function filterNot(callable $predicate): Sequence
     {
         return new FilteringSequence($this, $predicate, FilteringSequence::SEND_WHEN_FALSE);
+    }
+
+    /**
+     * @see Sequence::sorted()
+     */
+    public function sorted(): Sequence
+    {
+        return new SortingSequence($this, SortingSequence::PHP_BUILTIN_COMPARATOR, SortingSequence::SORT_ASCENDING);
+    }
+
+    /**
+     * @see Sequence::sortedBy()
+     */
+    public function sortedBy(callable $selector): Sequence
+    {
+        return new SortingSequence($this, SortingSequence::compareBy($selector), SortingSequence::SORT_ASCENDING);
+    }
+
+    /**
+     * @see Sequence::sortedByDescending()
+     */
+    public function sortedByDescending(callable $selector): Sequence
+    {
+        return new SortingSequence($this, SortingSequence::compareBy($selector), SortingSequence::SORT_DESCENDING);
+    }
+
+    /**
+     * @see Sequence::sortedDescending()
+     */
+    public function sortedDescending(): Sequence
+    {
+        return new SortingSequence($this, SortingSequence::PHP_BUILTIN_COMPARATOR, SortingSequence::SORT_DESCENDING);
+    }
+
+    /**
+     * @see Sequence::sortedWith()
+     */
+    public function sortedWith(callable $comparator): Sequence
+    {
+        return new SortingSequence($this, $comparator, SortingSequence::SORT_ASCENDING);
+    }
+
+    /**
+     * @see Sequence::sortedWithDescending()
+     */
+    public function sortedWithDescending(callable $comparator): Sequence
+    {
+        return new SortingSequence($this, $comparator, SortingSequence::SORT_DESCENDING);
     }
 
     /**

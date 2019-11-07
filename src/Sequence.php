@@ -248,6 +248,77 @@ interface Sequence extends IteratorAggregate
     public function requireNot(callable $predicate): Sequence;
 
     /**
+     * Returns a sequence that yields elements of this sequence sorted according to their natural sort order.
+     *
+     * @effect intermediate
+     * @effect stateful
+     *
+     * @return Sequence Sequence<T> -> Sequence<T>
+     */
+    public function sorted(): Sequence;
+
+    /**
+     * Returns a sequence that yields elements of this sequence sorted according to natural sort order of the
+     * value returned by specified $selector function.
+     *
+     * @effect intermediate
+     * @effect stateful
+     *
+     * @param callable $selector (T) -> K
+     * @return Sequence Sequence<T> -> Sequence<T>
+     */
+    public function sortedBy(callable $selector): Sequence;
+
+    /**
+     * Returns a sequence that yields elements of this sequence sorted descending according to natural sort order of the
+     * value returned by specified $selector function.
+     *
+     * @effect intermediate
+     * @effect stateful
+     *
+     * @param callable $selector (T) -> K
+     * @return Sequence Sequence<T> -> Sequence<T>
+     */
+    public function sortedByDescending(callable $selector): Sequence;
+
+    /**
+     * Returns a sequence that yields elements of this sequence sorted descending according to their natural sort order.
+     *
+     * @effect intermediate
+     * @effect stateful
+     *
+     * @return Sequence Sequence<T> -> Sequence<T>
+     */
+    public function sortedDescending(): Sequence;
+
+    /**
+     * Returns a sequence that yields elements of this sequence sorted according to the specified $comparator.
+     *
+     * @effect intermediate
+     * @effect stateful
+     *
+     * @param callable $comparator (T $a, T $b) -> int
+     * @return Sequence Sequence<T> -> Sequence<T>
+     *
+     * @see usort() for an example of how the $comparator must behave
+     */
+    public function sortedWith(callable $comparator): Sequence;
+
+    /**
+     * Returns a sequence that yields elements of this sequence sorted descending according to the
+     * specified $comparator.
+     *
+     * @effect intermediate
+     * @effect stateful
+     *
+     * @param callable $comparator (T $a, T $b) -> int
+     * @return Sequence Sequence<T> -> Sequence<T>
+     *
+     * @see usort() for an example of how the $comparator must behave
+     */
+    public function sortedWithDescending(callable $comparator): Sequence;
+
+    /**
      * Returns a sequence of results of applying the given $transform function to arrays that represent a window
      * of the given $size sliding along this sequence with the given $step.
      *
