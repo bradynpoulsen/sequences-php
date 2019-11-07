@@ -30,6 +30,16 @@ trait StatefulOperationsTrait
     }
 
     /**
+     * @see Sequence::filterIsInstance()
+     */
+    public function filterIsInstance(string $type): Sequence
+    {
+        return $this->filter(function ($element) use ($type): bool {
+            return $element instanceof $type;
+        });
+    }
+
+    /**
      * @see Sequence::filterNot()
      */
     public function filterNot(callable $predicate): Sequence

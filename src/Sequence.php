@@ -99,6 +99,18 @@ interface Sequence extends IteratorAggregate
     public function filter(callable $predicate): Sequence;
 
     /**
+     * Returns a sequence containing all elements of this sequence that are instances of the provided object $type.
+     *
+     * @effect intermediate
+     * @state stateful
+     *
+     * @param string $type <R> The FQCN of the desired type.
+     *
+     * @return Sequence Sequence<T> -> Sequence<R>
+     */
+    public function filterIsInstance(string $type): Sequence;
+
+    /**
      * Returns a sequence contain all elements of this sequence that DO NOT match the provided $predicate.
      *
      * The index of an element may be obtained by accepting a 2nd argument in the $predicate function.
