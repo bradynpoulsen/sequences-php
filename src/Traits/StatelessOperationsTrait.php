@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace BradynPoulsen\Sequences\Traits;
 
-use BradynPoulsen\Sequences\Operations\Stateless\ConstrainedOnceSequence;
-use BradynPoulsen\Sequences\Operations\Stateless\TransformingSequence;
+use BradynPoulsen\Sequences\Operations\Stateless\{
+    ConstrainedOnceSequence,
+    TransformingSequence
+};
 use BradynPoulsen\Sequences\Sequence;
 use InvalidArgumentException;
 

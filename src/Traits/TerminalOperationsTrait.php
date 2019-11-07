@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace BradynPoulsen\Sequences\Traits;
 
-use BradynPoulsen\Sequences\Operations\Terminal\PredicateMatchingOperations;
+use BradynPoulsen\Sequences\Operations\Terminal\{
+    PredicateMatchingOperations
+};
 use BradynPoulsen\Sequences\Sequence;
 
 trait TerminalOperationsTrait
