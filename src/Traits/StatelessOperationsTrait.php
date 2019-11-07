@@ -13,6 +13,7 @@ use BradynPoulsen\Sequences\Operations\Stateless\{
 };
 use BradynPoulsen\Sequences\Sequence;
 use InvalidArgumentException;
+use Iterator;
 
 trait StatelessOperationsTrait
 {
@@ -75,7 +76,11 @@ trait StatelessOperationsTrait
      */
     public function plus(iterable $elements): Sequence
     {
-        return new MergingSequence($this, $elements);
+        $sequence = new MergingSequence($this, $elements);
+        if ($elements instanceof Iterator) {
+            $sequence = $sequence->constrainOnce();
+        }
+        return $sequence;
     }
 
     /**
