@@ -6,6 +6,7 @@ namespace BradynPoulsen\Sequences\Traits;
 
 use BradynPoulsen\Sequences\Operations\Stateless\{
     ConstrainedOnceSequence,
+    DefaultingWhenEmptySequence,
     FlatteningSequence,
     TransformingSequence
 };
@@ -39,6 +40,14 @@ trait StatelessOperationsTrait
     public function flatten(): Sequence
     {
         return new FlatteningSequence($this);
+    }
+
+    /**
+     * @see Sequence::ifEmpty()
+     */
+    public function ifEmpty(callable $supplier): Sequence
+    {
+        return new DefaultingWhenEmptySequence($this, $supplier);
     }
 
     /**

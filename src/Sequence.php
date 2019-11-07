@@ -170,6 +170,19 @@ interface Sequence extends IteratorAggregate
     public function flatten(): Sequence;
 
     /**
+     * Returns a sequence that iterates through the elements either of this sequence or, if this sequence turns
+     * out to be empty, of the sequence returned by the provided $supplier function.
+     *
+     * @effect intermediate
+     * @state stateless
+     *
+     * @param callable $supplier () -> Sequence<B>
+     *
+     * @return Sequence Sequence<A> -> Sequence<A|B>
+     */
+    public function ifEmpty(callable $supplier): Sequence;
+
+    /**
      * Returns a sequence containing the results of applying the given $transform function to each element of
      * this sequence.
      *
