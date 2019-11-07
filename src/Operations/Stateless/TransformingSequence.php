@@ -43,4 +43,9 @@ final class TransformingSequence implements Sequence
             }
         });
     }
+
+    public function flatten(): Sequence
+    {
+        return new FlatteningSequence($this->previous, $this->transform);
+    }
 }

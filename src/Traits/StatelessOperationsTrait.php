@@ -6,6 +6,7 @@ namespace BradynPoulsen\Sequences\Traits;
 
 use BradynPoulsen\Sequences\Operations\Stateless\{
     ConstrainedOnceSequence,
+    FlatteningSequence,
     TransformingSequence
 };
 use BradynPoulsen\Sequences\Sequence;
@@ -22,6 +23,22 @@ trait StatelessOperationsTrait
             return $this;
         }
         return new ConstrainedOnceSequence($this);
+    }
+
+    /**
+     * @see Sequence::flatMap()
+     */
+    public function flatMap(callable $transform): Sequence
+    {
+        return new FlatteningSequence($this, $transform);
+    }
+
+    /**
+     * @see Sequence::flatten()
+     */
+    public function flatten(): Sequence
+    {
+        return new FlatteningSequence($this);
     }
 
     /**

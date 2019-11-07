@@ -124,6 +124,29 @@ interface Sequence extends IteratorAggregate
     public function filterNot(callable $predicate): Sequence;
 
     /**
+     * Returns a single sequence of all elements from results of the provided $transform function being invoked
+     * on each element of the original sequence.
+     *
+     * @effect intermediate
+     * @state stateless
+     *
+     * @param callable $transform (T $element[, int $index]) -> iterable<R>
+     *
+     * @return Sequence Sequence<T> -> Sequence<R>
+     */
+    public function flatMap(callable $transform): Sequence;
+
+    /**
+     * Returns a single sequence of all elements from each elements of the original sequence.
+     *
+     * @effect intermediate
+     * @state stateless
+     *
+     * @return Sequence Sequence<iterable<R>> -> Sequence<R>
+     */
+    public function flatten(): Sequence;
+
+    /**
      * Returns a sequence containing the results of applying the given $transform function to each element of
      * this sequence.
      *
