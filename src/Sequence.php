@@ -193,6 +193,9 @@ interface Sequence extends IteratorAggregate
     /**
      * Returns a sequence containing all elements of original sequence except the given $elements.
      *
+     * If the provided $elements is an Iterator, the resulting sequence will be constrained to being iterated
+     * only once. See {@see Sequence::constrainOnce()}.
+     *
      * @effect intermediate
      * @state stateful
      *
@@ -225,6 +228,9 @@ interface Sequence extends IteratorAggregate
 
     /**
      * Returns a sequence containing all elements of original sequence and then all elements of the given $elements.
+     *
+     * If the provided $elements is an Iterator, the resulting sequence will be constrained to being iterated
+     * only once. See {@see Sequence::constrainOnce()}.
      *
      * @effect intermediate
      * @state stateless
