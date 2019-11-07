@@ -30,8 +30,8 @@ final class DropSequence implements Sequence
 
     public function __construct(Sequence $previous, int $count)
     {
-        if ($count <= 0) {
-            throw new InvalidArgumentException("count must be greater than zero");
+        if ($count < 0) {
+            throw new InvalidArgumentException("count must be non-negative, but was $count");
         }
 
         $this->previous = $previous;
@@ -50,5 +50,13 @@ final class DropSequence implements Sequence
                 yield $element;
             }
         });
+    }
+
+    public function drop(int $count): Sequence
+    {
+        if ($count < 0) {
+            throw new InvalidArgumentException("count must be non-negative, but was $count");
+        }
+        return new self($this->previous, $this->count + $count);
     }
 }
