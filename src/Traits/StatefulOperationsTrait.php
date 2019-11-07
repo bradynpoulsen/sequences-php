@@ -6,6 +6,7 @@ namespace BradynPoulsen\Sequences\Traits;
 
 use BradynPoulsen\Sequences\SequenceOptions;
 use BradynPoulsen\Sequences\Operations\Stateful\{
+    DistinctSequence,
     FilteringSequence,
     WindowedSequence
 };
@@ -19,6 +20,24 @@ trait StatefulOperationsTrait
     public function chunked(int $size, ?callable $transform = null): Sequence
     {
         return $this->windowed($size, $size, SequenceOptions::INCLUDE_PARTIAL_WINDOWS, $transform);
+    }
+
+    /**
+     * @see Sequence::distinct()
+     */
+    public function distinct(): Sequence
+    {
+        return $this->distinctBy(function ($element) {
+            return $element;
+        });
+    }
+
+    /**
+     * @see Sequence::distinctBy()
+     */
+    public function distinctBy(callable $selector): Sequence
+    {
+        return new DistinctSequence($this, $selector);
     }
 
     /**

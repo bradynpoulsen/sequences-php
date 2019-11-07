@@ -86,6 +86,29 @@ interface Sequence extends IteratorAggregate
     public function chunked(int $size, ?callable $transform = null): Sequence;
 
     /**
+     * Returns a sequence containing only distinct elements from this sequence.
+     *
+     * @effect intermediate
+     * @state stateful
+     *
+     * @return Sequence Sequence<T> -> Sequence<T>
+     */
+    public function distinct(): Sequence;
+
+    /**
+     * Returns a sequence containing only elements from the given sequence having distinct keys returned
+     * by the given selector function.
+     *
+     * @effect intermediate
+     * @state stateful
+     *
+     * @param callable $selector (T) -> K
+     *
+     * @return Sequence Sequence<T> -> Sequence<T>
+     */
+    public function distinctBy(callable $selector): Sequence;
+
+    /**
      * Returns a sequence contain all elements of this sequence that match the provided $predicate.
      *
      * The index of an element may be obtained by accepting a 2nd argument in the $predicate function.
