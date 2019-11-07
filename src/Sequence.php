@@ -222,6 +222,17 @@ interface Sequence extends IteratorAggregate
     public function onEach(callable $action): Sequence;
 
     /**
+     * Returns a sequence containing all elements of original sequence and then all elements of the given $elements.
+     *
+     * @effect intermediate
+     * @state stateless
+     *
+     * @param iterable $elements iterable<B>
+     * @return Sequence Sequence<A> -> Sequence<A|B>
+     */
+    public function plus(iterable $elements): Sequence;
+
+    /**
      * Returns a sequence which validates each element matches the given $predicate.
      * {@see InvalidArgumentException} will be thrown if an element does not match the given $predicate.
      *

@@ -8,6 +8,7 @@ use BradynPoulsen\Sequences\Operations\Stateless\{
     ConstrainedOnceSequence,
     DefaultingWhenEmptySequence,
     FlatteningSequence,
+    MergingSequence,
     TransformingSequence
 };
 use BradynPoulsen\Sequences\Sequence;
@@ -67,6 +68,14 @@ trait StatelessOperationsTrait
             call_user_func($action, $element);
             return $element;
         });
+    }
+
+    /**
+     * @see Sequence::plus()
+     */
+    public function plus(iterable $elements): Sequence
+    {
+        return new MergingSequence($this, $elements);
     }
 
     /**
