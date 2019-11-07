@@ -21,23 +21,23 @@ final class GeneratingSequence implements Sequence
     /**
      * @var callable () -> Traversable
      */
-    private $factory;
+    private $supplier;
 
     /**
      * Use {@see sequenceFrom()} instead.
      *
-     * @param callable $factory () -> Traversable
+     * @param callable $supplier () -> Traversable
      *
      * @deprecated Use sequenceFrom() instead.
      */
-    public function __construct(callable $factory)
+    public function __construct(callable $supplier)
     {
-        $this->factory = $factory;
+        $this->supplier = $supplier;
     }
 
     public function getIterator(): Traversable
     {
-        $generator = call_user_func($this->factory);
+        $generator = call_user_func($this->supplier);
         if ($generator instanceof Traversable) {
             return $generator;
         }

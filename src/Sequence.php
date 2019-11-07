@@ -55,7 +55,6 @@ interface Sequence extends IteratorAggregate
      * @effect terminal
      *
      * @param callable|null $predicate (T) -> bool
-     *
      * @return bool Sequence<T> -> bool
      */
     public function any(?callable $predicate = null): bool;
@@ -79,8 +78,7 @@ interface Sequence extends IteratorAggregate
      * @effect intermediate
      * @state stateful
      *
-     * @param callable|null $transform (T[] chunk) -> R
-     *
+     * @param callable|null $transform (T[] $chunk) -> R
      * @return Sequence Sequence<T> -> Sequence<R>
      */
     public function chunked(int $size, ?callable $transform = null): Sequence;
@@ -103,7 +101,6 @@ interface Sequence extends IteratorAggregate
      * @state stateful
      *
      * @param callable $selector (T) -> K
-     *
      * @return Sequence Sequence<T> -> Sequence<T>
      */
     public function distinctBy(callable $selector): Sequence;
@@ -116,7 +113,7 @@ interface Sequence extends IteratorAggregate
      * @effect intermediate
      * @state stateful
      *
-     * @param callable $predicate (T [, int $indexed]) -> bool
+     * @param callable $predicate (T $element[, int $index]) -> bool
      * @return Sequence Sequence<T> -> Sequence<T>
      */
     public function filter(callable $predicate): Sequence;
@@ -128,7 +125,6 @@ interface Sequence extends IteratorAggregate
      * @state stateful
      *
      * @param string $type <R> The FQCN of the desired type.
-     *
      * @return Sequence Sequence<T> -> Sequence<R>
      */
     public function filterIsInstance(string $type): Sequence;
@@ -141,7 +137,7 @@ interface Sequence extends IteratorAggregate
      * @effect intermediate
      * @state stateful
      *
-     * @param callable $predicate (T [, int $indexed]) -> bool
+     * @param callable $predicate (T $element[, int $index]) -> bool
      * @return Sequence Sequence<T> -> Sequence<T>
      */
     public function filterNot(callable $predicate): Sequence;
@@ -154,7 +150,6 @@ interface Sequence extends IteratorAggregate
      * @state stateless
      *
      * @param callable $transform (T $element[, int $index]) -> iterable<R>
-     *
      * @return Sequence Sequence<T> -> Sequence<R>
      */
     public function flatMap(callable $transform): Sequence;
@@ -177,7 +172,6 @@ interface Sequence extends IteratorAggregate
      * @state stateless
      *
      * @param callable $supplier () -> Sequence<B>
-     *
      * @return Sequence Sequence<A> -> Sequence<A|B>
      */
     public function ifEmpty(callable $supplier): Sequence;
@@ -191,8 +185,7 @@ interface Sequence extends IteratorAggregate
      * @effect intermediate
      * @state stateless
      *
-     * @param callable $transform (T [, int $index]) -> R
-     *
+     * @param callable $transform (T $element[, int $index]) -> R
      * @return Sequence Sequence<T> -> Sequence<R>
      */
     public function map(callable $transform): Sequence;
@@ -204,7 +197,6 @@ interface Sequence extends IteratorAggregate
      * @effect terminal
      *
      * @param callable|null $predicate (T) -> bool
-     *
      * @return bool Sequence<T> -> bool
      */
     public function none(?callable $predicate = null): bool;
@@ -216,7 +208,6 @@ interface Sequence extends IteratorAggregate
      * @state stateless
      *
      * @param callable $action (T) -> void
-     *
      * @return Sequence Sequence<T> -> Sequence<T>
      */
     public function onEach(callable $action): Sequence;
