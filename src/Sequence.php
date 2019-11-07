@@ -106,6 +106,16 @@ interface Sequence extends IteratorAggregate
     public function distinctBy(callable $selector): Sequence;
 
     /**
+     * Returns a sequence containing all elements except first $count elements.
+     *
+     * @effect intermediate
+     * @state stateless
+     *
+     * @return Sequence Sequence<T> -> Sequence<T>
+     */
+    public function drop(int $count): Sequence;
+
+    /**
      * Returns a sequence contain all elements of this sequence that match the provided $predicate.
      *
      * The index of an element may be obtained by accepting a 2nd argument in the $predicate function.

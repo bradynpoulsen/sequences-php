@@ -7,6 +7,7 @@ namespace BradynPoulsen\Sequences\Traits;
 use BradynPoulsen\Sequences\Operations\Stateless\{
     ConstrainedOnceSequence,
     DefaultingWhenEmptySequence,
+    DropSequence,
     FlatteningSequence,
     MergingSequence,
     TransformingSequence
@@ -26,6 +27,14 @@ trait StatelessOperationsTrait
             return $this;
         }
         return new ConstrainedOnceSequence($this);
+    }
+
+    /**
+     * @see Sequence::drop()
+     */
+    public function drop(int $count): Sequence
+    {
+        return new DropSequence($this, $count);
     }
 
     /**
