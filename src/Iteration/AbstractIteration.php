@@ -80,7 +80,7 @@ abstract class AbstractIteration implements Iteration, IterationBuilder
 
     public function rewind()
     {
-        if ($this->nextIndex !== -1) {
+        if ($this->nextIndex > 0 || $this->nextIndex === 0 && $this->state !== self::STATE_READY) {
             throw new BadMethodCallException("This iterator cannot be rewound");
         }
     }
