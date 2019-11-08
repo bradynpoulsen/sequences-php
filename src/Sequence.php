@@ -60,6 +60,42 @@ interface Sequence extends IteratorAggregate
     public function any(?callable $predicate = null): bool;
 
     /**
+     * Returns an associative array containing key-value pairs provided by $transform function applied to elements of
+     * this sequence.
+     *
+     * @effect terminal
+     *
+     * @param callable $transform (T) -> [K, V]
+     * @return array Sequence<T> -> [K => V]
+     */
+    public function associate(callable $transform): array;
+
+    /**
+     * Returns an associative array containing the values provided by $valueSelector and indexed by $keySelector
+     * functions applied to elements of this sequence.
+     *
+     * If $valueSelector is not provided, the element will be used.
+     *
+     * @effect terminal
+     *
+     * @param callable $keySelector (T) -> K
+     * @param callable|null $valueSelector (T) -> V
+     * @return array Sequence<T> -> [K => V]
+     */
+    public function associateBy(callable $keySelector, ?callable $valueSelector = null): array;
+
+    /**
+     * Returns an associative array where keys are elements from the given sequence and values are produced by the
+     * $valueSelector function applied to each element.
+     *
+     * @effect terminal
+     *
+     * @param callable $valueSelector (T) -> V
+     * @return array Sequence<T> -> [T => V]
+     */
+    public function associateWith(callable $valueSelector): array;
+
+    /**
      * Returns a wrapper {@see Sequence} that provides values of this sequence, but ensures it can be iterated only
      * one time.
      *
