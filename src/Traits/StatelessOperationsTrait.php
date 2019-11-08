@@ -8,6 +8,7 @@ use BradynPoulsen\Sequences\Operations\Stateless\{
     ConstrainedOnceSequence,
     DefaultingWhenEmptySequence,
     DropSequence,
+    DropWhileSequence,
     FlatteningSequence,
     MergingSequence,
     TakeSequence,
@@ -41,6 +42,14 @@ trait StatelessOperationsTrait
             return $this;
         }
         return new DropSequence($this, $count);
+    }
+
+    /**
+     * @see Sequence::dropWhile()
+     */
+    public function dropWhile(callable $predicate): Sequence
+    {
+        return new DropWhileSequence($this, $predicate);
     }
 
     /**

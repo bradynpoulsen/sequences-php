@@ -116,6 +116,16 @@ interface Sequence extends IteratorAggregate
     public function drop(int $count): Sequence;
 
     /**
+     * Returns a sequence containing all elements except first elements that satisfy the given $predicate.
+     *
+     * @effect intermediate
+     * @state stateless
+     *
+     * @return Sequence
+     */
+    public function dropWhile(callable $predicate): Sequence;
+
+    /**
      * Returns a sequence contain all elements of this sequence that match the provided $predicate.
      *
      * The index of an element may be obtained by accepting a 2nd argument in the $predicate function.
