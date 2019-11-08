@@ -12,6 +12,7 @@ use BradynPoulsen\Sequences\Operations\Stateless\{
     FlatteningSequence,
     MergingSequence,
     TakeSequence,
+    TakeWhileSequence,
     TransformingSequence
 };
 use BradynPoulsen\Sequences\Sequence;
@@ -142,5 +143,13 @@ trait StatelessOperationsTrait
             return emptySequence();
         }
         return new TakeSequence($this, $count);
+    }
+
+    /**
+     * @see Sequence::takeWhile()
+     */
+    public function takeWhile(callable $predicate): Sequence
+    {
+        return new TakeWhileSequence($this, $predicate);
     }
 }

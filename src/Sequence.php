@@ -366,6 +366,17 @@ interface Sequence extends IteratorAggregate
     public function take(int $count): Sequence;
 
     /**
+     * Returns a sequence containing first elements satisfying the given $predicate.
+     *
+     * @effect intermediate
+     * @state stateless
+     *
+     * @param callable $predicate (T) -> bool
+     * @return Sequence
+     */
+    public function takeWhile(callable $predicate): Sequence;
+
+    /**
      * Returns a sequence of results of applying the given $transform function to arrays that represent a window
      * of the given $size sliding along this sequence with the given $step.
      *
