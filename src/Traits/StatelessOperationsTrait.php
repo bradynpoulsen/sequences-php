@@ -17,6 +17,8 @@ use BradynPoulsen\Sequences\Sequence;
 use InvalidArgumentException;
 use Iterator;
 
+use function BradynPoulsen\Sequences\emptySequence;
+
 trait StatelessOperationsTrait
 {
     /**
@@ -35,6 +37,9 @@ trait StatelessOperationsTrait
      */
     public function drop(int $count): Sequence
     {
+        if ($count === 0) {
+            return $this;
+        }
         return new DropSequence($this, $count);
     }
 
@@ -124,6 +129,9 @@ trait StatelessOperationsTrait
      */
     public function take(int $count): Sequence
     {
+        if ($count === 0) {
+            return emptySequence();
+        }
         return new TakeSequence($this, $count);
     }
 }

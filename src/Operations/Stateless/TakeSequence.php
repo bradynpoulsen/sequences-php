@@ -31,8 +31,8 @@ final class TakeSequence implements Sequence
 
     public function __construct(Sequence $previous, int $count)
     {
-        if ($count < 0) {
-            throw new InvalidArgumentException("count must be greater than or equal to zero");
+        if ($count <= 0) {
+            throw new InvalidArgumentException("count must be greater than zero, but was $count");
         }
 
         $this->previous = $previous;
@@ -57,15 +57,25 @@ final class TakeSequence implements Sequence
 
     public function drop(int $count): Sequence
     {
+        if ($count < 0) {
+            throw new InvalidArgumentException("count must be non-negative, but was $count");
+        } elseif ($count === 0) {
+            return $this;
+        }
         return $count >= $this->count
             ? emptySequence()
-            : new TakeSequence($this->previous, $this->count - $count);
+            : new SubSequence($this->previous, $count, $this->count);
     }
 
     public function take(int $count): Sequence
     {
-        return $count >= $this->count
-            ? $this
-            : new TakeSequence($this->previous, $count);
+        if ($count < 0) {
+            throw new InvalidArgumentException("count must be non-negative, but was $count");
+        } elseif ($count === 0) {
+            return emptySequence();
+        } elseif ($count < $this->count) {
+            $this->count = $count;
+        }
+        return $this;
     }
 }
