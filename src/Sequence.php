@@ -121,6 +121,7 @@ interface Sequence extends IteratorAggregate
      * @effect intermediate
      * @state stateless
      *
+     * @param callable $predicate (T) -> bool
      * @return Sequence
      */
     public function dropWhile(callable $predicate): Sequence;
@@ -387,7 +388,6 @@ interface Sequence extends IteratorAggregate
      * @param int $step the number of elements to move the window forward by on each step, must be positive
      * @param bool $partialWindows whether or not to keep partial windows in the end, if any
      * @param callable|null $transform (T[] $window) -> R defaults to returning the window as an array
-     *
      * @return Sequence Sequence<T> -> Sequence<R>
      *
      * @see SequenceOptions::INCLUDE_PARTIAL_WINDOWS
