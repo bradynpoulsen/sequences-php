@@ -147,7 +147,7 @@ trait TerminalOperationsTrait
     /**
      * @see Sequence::indexOf()
      */
-    public function indexOf(Sequence $source, $element): int
+    public function indexOf($element): int
     {
         return ElementSearchingOperations::indexOf($this, $element);
     }
@@ -179,7 +179,7 @@ trait TerminalOperationsTrait
     /**
      * @see Sequence::lastIndexOf()
      */
-    public function lastIndexOf(Sequence $source, $element): int
+    public function lastIndexOf($element): int
     {
         return ElementSearchingOperations::lastIndexOf($this, $element);
     }
