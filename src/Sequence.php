@@ -148,6 +148,16 @@ interface Sequence extends IteratorAggregate
     public function contains($element): bool;
 
     /**
+     * Returns the number of elements matching the given $predicate, if provided.
+     *
+     * @effect terminal
+     *
+     * @param callable|null $predicate (T) -> bool
+     * @return int Sequence<T> -> int
+     */
+    public function count(?callable $predicate = null): int;
+
+    /**
      * Returns a sequence containing only distinct elements from this sequence.
      *
      * @effect intermediate

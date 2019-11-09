@@ -9,7 +9,8 @@ use BradynPoulsen\Sequences\Operations\Terminal\{
     CalculatingOperations,
     ElementComparingOperations,
     ElementSearchingOperations,
-    PredicateMatchingOperations
+    PredicateMatchingOperations,
+    PredicateSearchingOperations
 };
 use BradynPoulsen\Sequences\Sequence;
 
@@ -77,6 +78,14 @@ trait TerminalOperationsTrait
     public function contains($element): bool
     {
         return ElementSearchingOperations::contains($this, $element);
+    }
+
+    /**
+     * @see Sequence::count()
+     */
+    public function count(?callable $predicate = null): int
+    {
+        return PredicateSearchingOperations::count($this, $predicate);
     }
 
     /**
