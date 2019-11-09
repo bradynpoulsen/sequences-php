@@ -8,6 +8,7 @@ use BradynPoulsen\Sequences\Operations\Terminal\{
     AssociateOperations,
     CalculatingOperations,
     ElementComparingOperations,
+    ElementSearchingOperations,
     PredicateMatchingOperations
 };
 use BradynPoulsen\Sequences\Sequence;
@@ -68,6 +69,14 @@ trait TerminalOperationsTrait
     public function averageBy(callable $selector): float
     {
         return CalculatingOperations::averageBy($this, $selector);
+    }
+
+    /**
+     * @see Sequence::contains()
+     */
+    public function contains($element): bool
+    {
+        return ElementSearchingOperations::contains($this, $element);
     }
 
     /**

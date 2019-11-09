@@ -126,6 +126,14 @@ interface Sequence extends IteratorAggregate
     public function constrainOnce(): Sequence;
 
     /**
+     * Returns true if element is found in the sequence.
+     *
+     * @param mixed $element The element to search for
+     * @return bool Sequence<T> -> bool
+     */
+    public function contains($element): bool;
+
+    /**
      * Splits this sequence into a sequence of arrays each not exceeding the given $size.
      *
      * The last list in the resulting sequence may have less elements than the given $size.
