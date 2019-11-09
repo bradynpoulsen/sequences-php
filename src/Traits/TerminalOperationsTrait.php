@@ -120,6 +120,22 @@ trait TerminalOperationsTrait
     }
 
     /**
+     * @see Sequence::indexOf()
+     */
+    public function indexOf(Sequence $source, $element): int
+    {
+        return ElementSearchingOperations::indexOf($this, $element);
+    }
+
+    /**
+     * @see Sequence::lastIndexOf()
+     */
+    public function lastIndexOf(Sequence $source, $element): int
+    {
+        return ElementSearchingOperations::lastIndexOf($this, $element);
+    }
+
+    /**
      * @see Sequence::max()
      */
     public function max()

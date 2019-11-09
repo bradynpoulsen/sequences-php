@@ -318,6 +318,26 @@ interface Sequence extends IteratorAggregate
     public function ifEmpty(callable $supplier): Sequence;
 
     /**
+     * Returns first index of $element, or -1 if this sequence does not contain $element.
+     *
+     * @effect terminal
+     *
+     * @param mixed $element The element to search for
+     * @return int Sequence<T> -> int
+     */
+    public function indexOf($element): int;
+
+    /**
+     * Returns last index of $element, or -1 if this sequence does not contain $element.
+     *
+     * @effect terminal
+     *
+     * @param mixed $element The element to search for
+     * @return int Sequence<T> -> int
+     */
+    public function lastIndexOf($element): int;
+
+    /**
      * Returns a sequence containing the results of applying the given $transform function to each element of
      * this sequence.
      *

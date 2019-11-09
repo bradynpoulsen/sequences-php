@@ -70,4 +70,31 @@ final class ElementSearchingOperations
             return null;
         }
     }
+
+    /**
+     * @see Sequence::indexOf()
+     */
+    public static function indexOf(Sequence $source, $element): int
+    {
+        foreach ($source->getIterator() as $index => $existingElement) {
+            if ($existingElement === $element) {
+                return $index;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * @see Sequence::lastIndexOf()
+     */
+    public static function lastIndexOf(Sequence $source, $element): int
+    {
+        $lastIndex = -1;
+        foreach ($source->getIterator() as $index => $existingElement) {
+            if ($existingElement === $element) {
+                $lastIndex = $index;
+            }
+        }
+        return $lastIndex;
+    }
 }
