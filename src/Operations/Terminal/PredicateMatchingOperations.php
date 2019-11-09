@@ -34,12 +34,8 @@ final class PredicateMatchingOperations
      */
     public static function any(Sequence $sequence, ?callable $predicate = null): bool
     {
-        $predicate = $predicate ?? function () {
-            return true;
-        };
-
         foreach ($sequence as $element) {
-            if (call_user_func($predicate, $element)) {
+            if ($predicate === null || call_user_func($predicate, $element)) {
                 return true;
             }
         }
@@ -52,12 +48,8 @@ final class PredicateMatchingOperations
      */
     public static function none(Sequence $sequence, ?callable $predicate = null): bool
     {
-        $predicate = $predicate ?? function () {
-            return true;
-        };
-
         foreach ($sequence as $element) {
-            if (call_user_func($predicate, $element)) {
+            if ($predicate === null || call_user_func($predicate, $element)) {
                 return false;
             }
         }

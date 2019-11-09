@@ -41,6 +41,8 @@ interface Iteration extends Iterator
     public function next();
 
     /**
+     * Iterations NEVER rewind. No-op for backwards compatibility.
+     *
      * @deprecated Iteration is a simplification of PHP Iterators. Use hasNext() or pluckNext() instead!
      */
     public function rewind();
