@@ -13,7 +13,8 @@ use BradynPoulsen\Sequences\Operations\Stateless\{
     MergingSequence,
     TakeSequence,
     TakeWhileSequence,
-    TransformingSequence
+    TransformingSequence,
+    ZippingSequence
 };
 use BradynPoulsen\Sequences\Sequence;
 use InvalidArgumentException;
@@ -151,5 +152,13 @@ trait StatelessOperationsTrait
     public function takeWhile(callable $predicate): Sequence
     {
         return new TakeWhileSequence($this, $predicate);
+    }
+
+    /**
+     * @see Sequence::zip()
+     */
+    public function zip(Sequence $other, ?callable $transform = null): Sequence
+    {
+        return new ZippingSequence($this, $other, $transform);
     }
 }

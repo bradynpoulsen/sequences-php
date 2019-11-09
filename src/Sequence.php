@@ -740,4 +740,18 @@ interface Sequence extends IteratorAggregate
         bool $partialWindows = SequenceOptions::NO_PARTIAL_WINDOWS,
         ?callable $transform = null
     ): Sequence;
+
+    /**
+     * Returns a sequence of values built from the elements of this sequence and the other sequence with the same index
+     * using the provided $transform function applied to each pair of elements, if provided; otherwise as an
+     * array [A, B]. The resulting sequence ends as soon as the shortest input sequence ends.
+     *
+     * @effect intermediate
+     * @state stateless
+     *
+     * @param Sequence $other Sequence<B>
+     * @param callable|null $transform (A, B) -> R
+     * @return Sequence Sequence<A> -> Sequence<R>
+     */
+    public function zip(Sequence $other, ?callable $transform = null): Sequence;
 }
