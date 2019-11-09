@@ -6,6 +6,7 @@ namespace BradynPoulsen\Sequences;
 
 use InvalidArgumentException;
 use IteratorAggregate;
+use OutOfRangeException;
 use Traversable;
 
 /**
@@ -188,6 +189,37 @@ interface Sequence extends IteratorAggregate
      * @return Sequence
      */
     public function dropWhile(callable $predicate): Sequence;
+
+    /**
+     * Returns an element at the given $index or throws an {@see OutOfRangeException} if the index is out of bounds
+     * of this sequence.
+     *
+     * @effect terminal
+     *
+     * @return mixed Sequence<T> -> T
+     * @throws OutOfRangeException if the given index is not contained.
+     */
+    public function elementAt(int $index);
+
+    /**
+     * Returns an element at the given $index or the result of calling the $defaultValue function if the index is out
+     * of bounds of this sequence.
+     *
+     * @effect terminal
+     *
+     * @param callable $defaultValue (int) -> T
+     * @return mixed Sequence<T> -> T
+     */
+    public function elementAtOrElse(int $index, callable $defaultValue);
+
+    /**
+     * Returns an element at the given $index or null if the index is out of bounds of this sequence.
+     *
+     * @effect terminal
+     *
+     * @return mixed|null Sequence<T> -> ?T
+     */
+    public function elementAtOrNull(int $index);
 
     /**
      * Returns a sequence contain all elements of this sequence that match the provided $predicate.

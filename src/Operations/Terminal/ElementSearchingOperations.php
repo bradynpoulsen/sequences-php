@@ -29,4 +29,45 @@ final class ElementSearchingOperations
 
         return false;
     }
+
+    /**
+     * @see Sequence::elementAt()
+     */
+    public static function elementAt(Sequence $source, int $index)
+    {
+        foreach ($source->getIterator() as $existingIndex => $element) {
+            if ($existingIndex === $index) {
+                return $element;
+            }
+        }
+        throw new OutOfRangeException("provided index is not contained in this sequence: " . $index);
+    }
+
+    /**
+     * @see Sequence::elementAtOrElse()
+     *
+     * @param callable $defaultValue (int) -> B
+     */
+    public static function elementAtOrElse(Sequence $source, int $index, callable $defaultValue)
+    {
+        try {
+            return self::elementAt($source, $index);
+        } catch (OutOfRangeException $outOfBounds) {
+            return $defaultValue($index);
+        }
+    }
+
+    /**
+     * @see Sequence::elementAtOrNull()
+     *
+     * @return mixed|null
+     */
+    public static function elementAtOrNull(Sequence $source, int $index)
+    {
+        try {
+            return self::elementAt($source, $index);
+        } catch (OutOfRangeException $outOfBounds) {
+            return null;
+        }
+    }
 }

@@ -80,6 +80,30 @@ trait TerminalOperationsTrait
     }
 
     /**
+     * @see Sequence::elementAt()
+     */
+    public function elementAt(int $index)
+    {
+        return ElementSearchingOperations::elementAt($this, $index);
+    }
+
+    /**
+     * @see Sequence::elementAtOrElse()
+     */
+    public function elementAtOrElse(int $index, callable $defaultValue)
+    {
+        return ElementSearchingOperations::elementAtOrElse($this, $index, $defaultValue);
+    }
+
+    /**
+     * @see Sequence::elementAtOrNull()
+     */
+    public function elementAtOrNull(int $index)
+    {
+        return ElementSearchingOperations::elementAtOrNull($this, $index);
+    }
+
+    /**
      * @see Sequence::fold()
      */
     public function fold($initial, callable $operation)
