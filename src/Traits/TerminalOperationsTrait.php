@@ -153,11 +153,27 @@ trait TerminalOperationsTrait
     }
 
     /**
+     * @see Sequence::last()
+     */
+    public function last(?callable $predicate = null)
+    {
+        return PredicateSearchingOperations::last($this, $predicate);
+    }
+
+    /**
      * @see Sequence::lastIndexOf()
      */
     public function lastIndexOf(Sequence $source, $element): int
     {
         return ElementSearchingOperations::lastIndexOf($this, $element);
+    }
+
+    /**
+     * @see Sequence::lastOrNull()
+     */
+    public function lastOrNull(?callable $predicate = null)
+    {
+        return PredicateSearchingOperations::lastOrNull($this, $predicate);
     }
 
     /**

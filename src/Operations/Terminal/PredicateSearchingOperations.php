@@ -62,4 +62,37 @@ final class PredicateSearchingOperations
             return null;
         }
     }
+
+    /**
+     * @see Sequence::last()
+     *
+     * @param callable|null $predicate (T) -> bool
+     */
+    public static function last(Sequence $source, ?callable $predicate = null)
+    {
+        $lastElement = Nothing::get();
+        foreach ($source->getIterator() as $element) {
+            if ($predicate === null || call_user_func($predicate, $element)) {
+                $lastElement = $element;
+            }
+        }
+        if ($lastElement !== Nothing::get()) {
+            return $lastElement;
+        }
+        throw new UnexpectedValueException("No element matched the given predicate");
+    }
+
+    /**
+     * @see Sequence::lastOrNull()
+     *
+     * @param callable|null $predicate (T) -> bool
+     */
+    public static function lastOrNull(Sequence $source, ?callable $predicate = null)
+    {
+        try {
+            return self::last($source, $predicate);
+        } catch (UnexpectedValueException $unexpectedValueException) {
+            return null;
+        }
+    }
 }

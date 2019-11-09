@@ -360,6 +360,17 @@ interface Sequence extends IteratorAggregate
     public function indexOf($element): int;
 
     /**
+     * Returns the last element matching the given $predicate.
+     *
+     * @effect terminal
+     *
+     * @param callable|null $predicate (T) -> bool
+     * @return mixed Sequence<T> -> T
+     * @throws UnexpectedValueException if no elements matched the predicate
+     */
+    public function last(?callable $predicate = null);
+
+    /**
      * Returns last index of $element, or -1 if this sequence does not contain $element.
      *
      * @effect terminal
@@ -368,6 +379,16 @@ interface Sequence extends IteratorAggregate
      * @return int Sequence<T> -> int
      */
     public function lastIndexOf($element): int;
+
+    /**
+     * Returns the last element matching the given $predicate, or null if element was not found.
+     *
+     * @effect terminal
+     *
+     * @param callable|null $predicate (T) -> bool
+     * @return mixed Sequence<T> -> T
+     */
+    public function lastOrNull(?callable $predicate = null);
 
     /**
      * Returns a sequence containing the results of applying the given $transform function to each element of
