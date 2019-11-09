@@ -48,4 +48,27 @@ final class AssociateOperations
         }
         return $result;
     }
+
+    /**
+     * @see Sequence::groupBy()
+     *
+     * @param callable $keySelector (T) -> K
+     * @param callable|null $valueTransform (T) -> V
+     * @return mixed[][] [K => V[]]
+     */
+    public static function groupBy(Sequence $source, callable $keySelector, ?callable $valueTransform = null): array
+    {
+        $result = [];
+        foreach ($source->getIterator() as $element) {
+            $key = call_user_func($keySelector, $element);
+            if (!array_key_exists($key, $result)) {
+                $result[$key] = [];
+            }
+            $value = $valueTransform !== null
+                ? call_user_func($valueTransform, $element)
+                : $element;
+            array_push($result[$key], $value);
+        }
+        return $result;
+    }
 }

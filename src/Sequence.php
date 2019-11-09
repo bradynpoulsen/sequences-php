@@ -222,6 +222,19 @@ interface Sequence extends IteratorAggregate
     public function flatten(): Sequence;
 
     /**
+     * Groups values returned by the $valueTransform function, if given, applied to each element of the this
+     * sequence by the key returned by the given $keySelector function applied to the element and returns an
+     * associative array where each group key is associated with a list of corresponding values.
+     *
+     * @effect terminal
+     *
+     * @param callable $keySelector (T) -> K
+     * @param callable|null $valueTransform (T) -> V
+     * @return array [K => V[]]
+     */
+    public function groupBy(callable $keySelector, ?callable $valueTransform = null): array;
+
+    /**
      * Returns a sequence that iterates through the elements either of this sequence or, if this sequence turns
      * out to be empty, of the sequence returned by the provided $supplier function.
      *

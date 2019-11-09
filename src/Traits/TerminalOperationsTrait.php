@@ -53,6 +53,14 @@ trait TerminalOperationsTrait
     }
 
     /**
+     * @see Sequence::groupBy()
+     */
+    public function groupBy(callable $keySelector, ?callable $valueTransform = null): array
+    {
+        return AssociateOperations::groupBy($this, $keySelector, $valueTransform);
+    }
+
+    /**
      * @see Sequence::none()
      */
     public function none(?callable $predicate = null): bool
