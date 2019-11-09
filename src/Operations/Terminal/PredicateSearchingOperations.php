@@ -126,4 +126,38 @@ final class PredicateSearchingOperations
             return null;
         }
     }
+
+    /**
+     * @see Sequence::single()
+     *
+     * @param callable|null $predicate (T) -> bool
+     */
+    public static function single(Sequence $source, ?callable $predicate = null)
+    {
+        $foundElement = Nothing::get();
+        foreach ($source->getIterator() as $element) {
+            if (call_user_func($predicate, $element)) {
+                if ($foundElement !== Nothing::get()) {
+                    throw new OverflowException("Expected only one element matching given predicate");
+                }
+                $foundElement = $element;
+            }
+        }
+        if ($foundElement !== Nothing::get()) {
+            return $foundElement;
+        }
+        throw new UnexpectedValueException("Expected exactly one element matching given predicate");
+    }
+
+    /**
+     * @see Sequence::singleOrNull()
+     */
+    public static function singleOrNull(Sequence $source, ?callable $predicate = null)
+    {
+        try {
+            return self::single($source, $predicate);
+        } catch (OverflowException|UnexpectedValueException $exception) {
+            return null;
+        }
+    }
 }

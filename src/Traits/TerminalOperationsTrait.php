@@ -257,6 +257,22 @@ trait TerminalOperationsTrait
     }
 
     /**
+     * @see Sequence::single()
+     */
+    public function single(?callable $predicate = null)
+    {
+        return PredicateSearchingOperations::single($this, $predicate);
+    }
+
+    /**
+     * @see Sequence::singleOrNull()
+     */
+    public function singleOrNull(?callable $predicate = null)
+    {
+        return PredicateSearchingOperations::singleOrNull($this, $predicate);
+    }
+
+    /**
      * @see Sequence::sum()
      */
     public function sum()

@@ -7,6 +7,7 @@ namespace BradynPoulsen\Sequences;
 use InvalidArgumentException;
 use IteratorAggregate;
 use OutOfRangeException;
+use OverflowException;
 use Traversable;
 use UnexpectedValueException;
 
@@ -570,6 +571,30 @@ interface Sequence extends IteratorAggregate
      * @return Sequence Sequence<T> -> Sequence<T>
      */
     public function requireNot(callable $predicate): Sequence;
+
+    /**
+     * Returns the single element matching the given $predicate, or throws exception if there is no or more than
+     * one matching element.
+     *
+     * @effect terminal
+     *
+     * @param callable|null $predicate (T) -> bool
+     * @return mixed Sequence<T> -> T
+     * @throws UnexpectedValueException if no elements matched the predicate
+     * @throws OverflowException if more than one element matched the predicate
+     */
+    public function single(?callable $predicate = null);
+
+    /**
+     * Returns the single element matching the given $predicate, or returns null if there is no or more than one
+     * matching element.
+     *
+     * @effect terminal
+     *
+     * @param callable|null $predicate (T) -> bool
+     * @return mixed|null Sequence<T> -> ?T
+     */
+    public function singleOrNull(?callable $predicate = null);
 
     /**
      * Returns a sequence that yields elements of this sequence sorted according to their natural sort order.
