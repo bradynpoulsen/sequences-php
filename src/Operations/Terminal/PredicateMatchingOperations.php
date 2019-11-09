@@ -17,6 +17,8 @@ final class PredicateMatchingOperations
 
     /**
      * @see Sequence::all()
+     *
+     * @param callable $predicate (T) -> bool
      */
     public static function all(Sequence $sequence, callable $predicate): bool
     {
@@ -31,6 +33,8 @@ final class PredicateMatchingOperations
 
     /**
      * @see Sequence::any()
+     *
+     * @param callable|null $predicate (T) -> bool
      */
     public static function any(Sequence $sequence, ?callable $predicate = null): bool
     {
@@ -45,6 +49,8 @@ final class PredicateMatchingOperations
 
     /**
      * @see Sequence::none()
+     *
+     * @param callable|null $predicate (T) -> bool
      */
     public static function none(Sequence $sequence, ?callable $predicate = null): bool
     {

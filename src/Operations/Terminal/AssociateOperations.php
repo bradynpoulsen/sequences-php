@@ -16,7 +16,10 @@ final class AssociateOperations
     }
 
     /**
+     * @see Sequence::associate()
+     *
      * @param callable $transform (T) -> [K, V]
+     * @return mixed[] [K => V]
      */
     public static function associate(Sequence $source, callable $transform): array
     {
@@ -28,6 +31,13 @@ final class AssociateOperations
         return $result;
     }
 
+    /**
+     * @see Sequence::associateBy()
+     *
+     * @param callable $keySelector (T) -> K
+     * @param callable|null $valueSelector (T) -> V
+     * @return mixed[] [K => V]
+     */
     public static function associateBy(Sequence $source, callable $keySelector, ?callable $valueSelector = null): array
     {
         $valueSelector = $valueSelector ?? function ($element) {
@@ -40,6 +50,12 @@ final class AssociateOperations
         return $result;
     }
 
+    /**
+     * @see Sequence::associateWith()
+     *
+     * @param callable $valueSelector (T) -> V
+     * @return mixed[] [T => V]
+     */
     public static function associateWith(Sequence $source, callable $valueSelector): array
     {
         $result = [];
