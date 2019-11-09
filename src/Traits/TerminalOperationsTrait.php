@@ -70,6 +70,14 @@ trait TerminalOperationsTrait
     }
 
     /**
+     * @see Sequence::fold()
+     */
+    public function fold($initial, callable $operation)
+    {
+        return CalculatingOperations::fold($this, $initial, $operation);
+    }
+
+    /**
      * @see Sequence::groupBy()
      */
     public function groupBy(callable $keySelector, ?callable $valueTransform = null): array
@@ -83,6 +91,14 @@ trait TerminalOperationsTrait
     public function none(?callable $predicate = null): bool
     {
         return PredicateMatchingOperations::none($this, $predicate);
+    }
+
+    /**
+     * @see Sequence::reduce()
+     */
+    public function reduce(callable $operation)
+    {
+        return CalculatingOperations::reduce($this, $operation);
     }
 
     /**

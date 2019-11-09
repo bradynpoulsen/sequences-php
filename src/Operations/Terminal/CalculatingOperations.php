@@ -52,6 +52,38 @@ final class CalculatingOperations
     }
 
     /**
+     * @see Sequence::fold()
+     *
+     * @param callable $operation (R $acc, T $element[, int $index]) -> R
+     */
+    public static function fold(Sequence $source, $initial, callable $operation)
+    {
+        $accumulated = $initial;
+        foreach ($source->getIterator() as $index => $element) {
+            $accumulated = call_user_func($operation, $accumulated, $element, $index);
+        }
+        return $accumulated;
+    }
+
+    /**
+     * @see Sequence::reduce()
+     *
+     * @param callable $operation (R $acc, T $element[, int $index]) -> R
+     */
+    public static function reduce(Sequence $source, callable $operation)
+    {
+        $iteration = Iterations::fromTraversable($source->getIterator());
+        if (!$iteration->hasNext()) {
+            throw new LengthException("Cannot reduce on empty sequence");
+        }
+        $accumulated = $iteration->pluckNext();
+        foreach ($iteration as $index => $element) {
+            $accumulated = call_user_func($operation, $accumulated, $element, $index);
+        }
+        return $accumulated;
+    }
+
+    /**
      * @see Sequence::sum()
      */
     public static function sum(Sequence $source)

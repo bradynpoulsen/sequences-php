@@ -241,6 +241,18 @@ interface Sequence extends IteratorAggregate
     public function flatten(): Sequence;
 
     /**
+     * Accumulates value starting with initial value and applying $operation from left to right to current accumulator
+     * value and each element with its index in the original sequence.
+     *
+     * @effect terminal
+     *
+     * @param mixed $initial <R> The initial accumulator value to use in the $operation.
+     * @param callable $operation (R $acc, T $element[, int $index]) -> R
+     * @return mixed Sequence<T> -> R
+     */
+    public function fold($initial, callable $operation);
+
+    /**
      * Groups values returned by the $valueTransform function, if given, applied to each element of the this
      * sequence by the key returned by the given $keySelector function applied to the element and returns an
      * associative array where each group key is associated with a list of corresponding values.
@@ -328,6 +340,17 @@ interface Sequence extends IteratorAggregate
      * @return Sequence Sequence<A> -> Sequence<A|B>
      */
     public function plus(iterable $elements): Sequence;
+
+    /**
+     * Accumulates value starting with the first element and applying $operation from left to right to current
+     * accumulator value and each element with its index in the original sequence.
+     *
+     * @effect terminal
+     *
+     * @param callable $operation (R $acc, T $element[, int $index]) -> R
+     * @return mixed Sequence<T> -> R
+     */
+    public function reduce(callable $operation);
 
     /**
      * Returns a sequence which validates each element matches the given $predicate.
