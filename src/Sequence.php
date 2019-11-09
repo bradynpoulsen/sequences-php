@@ -708,6 +708,15 @@ interface Sequence extends IteratorAggregate
     public function takeWhile(callable $predicate): Sequence;
 
     /**
+     * Collect all of the elements in this sequence into an array.
+     *
+     * @effect terminal
+     *
+     * @return array
+     */
+    public function toArray(): array;
+
+    /**
      * Returns a sequence of results of applying the given $transform function to arrays that represent a window
      * of the given $size sliding along this sequence with the given $step.
      *
