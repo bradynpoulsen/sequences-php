@@ -111,6 +111,30 @@ trait TerminalOperationsTrait
     }
 
     /**
+     * @see Sequence::min()
+     */
+    public function min()
+    {
+        return ElementComparingOperations::min($this);
+    }
+
+    /**
+     * @see Sequence::minBy()
+     */
+    public function minBy(callable $selector)
+    {
+        return ElementComparingOperations::minBy($this, $selector);
+    }
+
+    /**
+     * @see Sequence::minWith()
+     */
+    public function minWith(callable $comparator)
+    {
+        return ElementComparingOperations::minWith($this, $comparator);
+    }
+
+    /**
      * @see Sequence::none()
      */
     public function none(?callable $predicate = null): bool

@@ -56,4 +56,45 @@ final class ElementComparingOperations
         }
         return $largestElement;
     }
+
+    /**
+     * @see Sequence::min()
+     */
+    public static function min(Sequence $source)
+    {
+        $smallestElement = null;
+        foreach ($source->getIterator() as $element) {
+            if ($smallestElement === null || $element < $smallestElement) {
+                $smallestElement = $element;
+            }
+        }
+        return $smallestElement;
+    }
+
+    /**
+     * @see Sequence::minBy()
+     *
+     * @param callable $selector (T) -> R
+     */
+    public static function minBy(Sequence $source, callable $selector)
+    {
+        $comparator = SortingSequence::compareBy($selector);
+        return self::minWith($source, $comparator);
+    }
+
+    /**
+     * @see Sequence::minWith()
+     *
+     * @param callable $comparator (T $a, T $b) -> int
+     */
+    public static function minWith(Sequence $source, callable $comparator)
+    {
+        $smallestElement = null;
+        foreach ($source->getIterator() as $element) {
+            if ($smallestElement === null || call_user_func($comparator, $element, $smallestElement) < 0) {
+                $smallestElement = $element;
+            }
+        }
+        return $smallestElement;
+    }
 }

@@ -322,6 +322,36 @@ interface Sequence extends IteratorAggregate
     public function maxWith(callable $comparator);
 
     /**
+     * Returns the smallest element or null if there are no elements.
+     *
+     * @effect terminal
+     *
+     * @return mixed|null Sequence<T> -> ?T
+     */
+    public function min();
+
+    /**
+     * Returns the first element yielding the smallest value of the given $selector or null if there are no elements.
+     *
+     * @effect terminal
+     *
+     * @param callable $selector (T) -> R
+     * @return mixed|null Sequence<T> -> ?T
+     */
+    public function minBy(callable $selector);
+
+    /**
+     * Returns the first element having the smallest value according to the provided $comparator or null if there are
+     * no elements.
+     *
+     * @effect terminal
+     *
+     * @param callable $comparator (T $a, T $b) -> int
+     * @return mixed|null Sequence<T> -> ?T
+     */
+    public function minWith(callable $comparator);
+
+    /**
      * Returns a sequence containing all elements of original sequence except the given $elements.
      *
      * If the provided $elements is an Iterator, the resulting sequence will be constrained to being iterated
