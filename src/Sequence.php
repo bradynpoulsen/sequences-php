@@ -96,6 +96,25 @@ interface Sequence extends IteratorAggregate
     public function associateWith(callable $valueSelector): array;
 
     /**
+     * Returns an average value of elements in this sequence.
+     *
+     * @effect terminal
+     *
+     * @return float Sequence<T> -> float
+     */
+    public function average(): float;
+
+    /**
+     * Returns the average value of all values produced by $selector function applied to each element in this sequence.
+     *
+     * @effect terminal
+     *
+     * @param callable $selector (T) -> int|float
+     * @return float Sequence<T> -> float
+     */
+    public function averageBy(callable $selector): float;
+
+    /**
      * Returns a wrapper {@see Sequence} that provides values of this sequence, but ensures it can be iterated only
      * one time.
      *

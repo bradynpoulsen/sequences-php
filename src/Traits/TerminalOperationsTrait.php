@@ -6,6 +6,7 @@ namespace BradynPoulsen\Sequences\Traits;
 
 use BradynPoulsen\Sequences\Operations\Terminal\{
     AssociateOperations,
+    CalculatingOperations,
     PredicateMatchingOperations
 };
 use BradynPoulsen\Sequences\Sequence;
@@ -50,6 +51,22 @@ trait TerminalOperationsTrait
     public function associateWith(callable $valueSelector): array
     {
         return AssociateOperations::associateWith($this, $valueSelector);
+    }
+
+    /**
+     * @see Sequence::average()
+     */
+    public function average(): float
+    {
+        return CalculatingOperations::average($this);
+    }
+
+    /**
+     * @see Sequence::averageBy()
+     */
+    public function averageBy(callable $selector): float
+    {
+        return CalculatingOperations::averageBy($this, $selector);
     }
 
     /**
