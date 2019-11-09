@@ -14,7 +14,8 @@ use BradynPoulsen\Sequences\Operations\Stateless\{
     TakeSequence,
     TakeWhileSequence,
     TransformingSequence,
-    ZippingSequence
+    ZippingSequence,
+    ZippingWithNextSequence
 };
 use BradynPoulsen\Sequences\Sequence;
 use InvalidArgumentException;
@@ -160,5 +161,13 @@ trait StatelessOperationsTrait
     public function zip(Sequence $other, ?callable $transform = null): Sequence
     {
         return new ZippingSequence($this, $other, $transform);
+    }
+
+    /**
+     * @see Sequence::zipWithNext()
+     */
+    public function zipWithNext(?callable $transform = null): Sequence
+    {
+        return new ZippingWithNextSequence($this, $transform);
     }
 }

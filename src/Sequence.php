@@ -754,4 +754,16 @@ interface Sequence extends IteratorAggregate
      * @return Sequence Sequence<A> -> Sequence<R>
      */
     public function zip(Sequence $other, ?callable $transform = null): Sequence;
+
+    /**
+     * Returns a sequence containing the results of applying the given $transform function, if provided, to an each pair
+     * of two adjacent elements in this sequence.
+     *
+     * @effect intermediate
+     * @state stateless
+     *
+     * @param callable|null $transform (T $a, T $b) -> R
+     * @return Sequence Sequence<T> -> Sequence<R>
+     */
+    public function zipWithNext(?callable $transform = null): Sequence;
 }
