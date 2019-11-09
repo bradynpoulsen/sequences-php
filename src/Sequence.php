@@ -142,7 +142,9 @@ interface Sequence extends IteratorAggregate
     public function constrainOnce(): Sequence;
 
     /**
-     * Returns true if element is found in the sequence.
+     * Returns true if $element is found in this sequence.
+     *
+     * @effect terminal
      *
      * @param mixed $element The element to search for
      * @return bool Sequence<T> -> bool
