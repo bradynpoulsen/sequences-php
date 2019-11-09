@@ -113,6 +113,22 @@ trait TerminalOperationsTrait
     }
 
     /**
+     * @see Sequence::first()
+     */
+    public function first(?callable $predicate = null)
+    {
+        return PredicateSearchingOperations::first($this, $predicate);
+    }
+
+    /**
+     * @see Sequence::firstOrNull()
+     */
+    public function firstOrNull(?callable $predicate = null)
+    {
+        return PredicateSearchingOperations::firstOrNull($this, $predicate);
+    }
+
+    /**
      * @see Sequence::fold()
      */
     public function fold($initial, callable $operation)

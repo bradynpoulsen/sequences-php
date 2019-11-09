@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use IteratorAggregate;
 use OutOfRangeException;
 use Traversable;
+use UnexpectedValueException;
 
 /**
  * A sequence of values that can be iterated over. The values are evaluated lazily, and the sequence
@@ -267,6 +268,27 @@ interface Sequence extends IteratorAggregate
      * @return Sequence Sequence<T> -> Sequence<T>
      */
     public function filterNot(callable $predicate): Sequence;
+
+    /**
+     * Returns the first element matching the given $predicate.
+     *
+     * @effect terminal
+     *
+     * @param callable|null $predicate (T) -> bool
+     * @return mixed Sequence<T> -> T
+     * @throws UnexpectedValueException if no elements matched the predicate
+     */
+    public function first(?callable $predicate = null);
+
+    /**
+     * Returns the first element matching the given $predicate, or null if element was not found.
+     *
+     * @effect terminal
+     *
+     * @param callable|null $predicate (T) -> bool
+     * @return mixed Sequence<T> -> T
+     */
+    public function firstOrNull(?callable $predicate = null);
 
     /**
      * Returns a single sequence of all elements from results of the provided $transform function being invoked

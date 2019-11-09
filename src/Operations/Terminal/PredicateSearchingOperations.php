@@ -33,4 +33,33 @@ final class PredicateSearchingOperations
         }
         return $count;
     }
+
+    /**
+     * @see Sequence::first()
+     *
+     * @param callable|null $predicate (T) -> bool
+     */
+    public static function first(Sequence $source, ?callable $predicate = null)
+    {
+        foreach ($source->getIterator() as $element) {
+            if ($predicate === null || call_user_func($predicate, $element)) {
+                return $element;
+            }
+        }
+        throw new UnexpectedValueException("No element matched the given predicate");
+    }
+
+    /**
+     * @see Sequence::firstOrNull()
+     *
+     * @param callable|null $predicate (T) -> bool
+     */
+    public static function firstOrNull(Sequence $source, ?callable $predicate = null)
+    {
+        try {
+            return self::first($source, $predicate);
+        } catch (UnexpectedValueException $unexpectedValueException) {
+            return null;
+        }
+    }
 }
