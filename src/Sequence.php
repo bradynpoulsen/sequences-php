@@ -116,6 +116,19 @@ interface Sequence extends IteratorAggregate
     public function averageBy(callable $selector): float;
 
     /**
+     * Splits this sequence into a sequence of arrays each not exceeding the given $size.
+     *
+     * The last list in the resulting sequence may have less elements than the given $size.
+     *
+     * @effect intermediate
+     * @state stateful
+     *
+     * @param callable|null $transform (T[] $chunk) -> R
+     * @return Sequence Sequence<T> -> Sequence<R>
+     */
+    public function chunked(int $size, ?callable $transform = null): Sequence;
+
+    /**
      * Returns a wrapper {@see Sequence} that provides values of this sequence, but ensures it can be iterated only
      * one time.
      *
@@ -133,19 +146,6 @@ interface Sequence extends IteratorAggregate
      * @return bool Sequence<T> -> bool
      */
     public function contains($element): bool;
-
-    /**
-     * Splits this sequence into a sequence of arrays each not exceeding the given $size.
-     *
-     * The last list in the resulting sequence may have less elements than the given $size.
-     *
-     * @effect intermediate
-     * @state stateful
-     *
-     * @param callable|null $transform (T[] $chunk) -> R
-     * @return Sequence Sequence<T> -> Sequence<R>
-     */
-    public function chunked(int $size, ?callable $transform = null): Sequence;
 
     /**
      * Returns a sequence containing only distinct elements from this sequence.
