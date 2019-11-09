@@ -7,6 +7,7 @@ namespace BradynPoulsen\Sequences\Traits;
 use BradynPoulsen\Sequences\Operations\Terminal\{
     AssociateOperations,
     CalculatingOperations,
+    ElementComparingOperations,
     PredicateMatchingOperations
 };
 use BradynPoulsen\Sequences\Sequence;
@@ -83,6 +84,30 @@ trait TerminalOperationsTrait
     public function groupBy(callable $keySelector, ?callable $valueTransform = null): array
     {
         return AssociateOperations::groupBy($this, $keySelector, $valueTransform);
+    }
+
+    /**
+     * @see Sequence::max()
+     */
+    public function max()
+    {
+        return ElementComparingOperations::max($this);
+    }
+
+    /**
+     * @see Sequence::maxBy()
+     */
+    public function maxBy(callable $selector)
+    {
+        return ElementComparingOperations::maxBy($this, $selector);
+    }
+
+    /**
+     * @see Sequence::maxWith()
+     */
+    public function maxWith(callable $comparator)
+    {
+        return ElementComparingOperations::maxWith($this, $comparator);
     }
 
     /**

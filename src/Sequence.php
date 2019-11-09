@@ -292,6 +292,36 @@ interface Sequence extends IteratorAggregate
     public function map(callable $transform): Sequence;
 
     /**
+     * Returns the largest element or null if there are no elements.
+     *
+     * @effect terminal
+     *
+     * @return mixed|null Sequence<T> -> ?T
+     */
+    public function max();
+
+    /**
+     * Returns the first element yielding the largest value of the given $selector or null if there are no elements.
+     *
+     * @effect terminal
+     *
+     * @param callable $selector (T) -> R
+     * @return mixed|null Sequence<T> -> ?T
+     */
+    public function maxBy(callable $selector);
+
+    /**
+     * Returns the first element having the largest value according to the provided $comparator or null if there are
+     * no elements.
+     *
+     * @effect terminal
+     *
+     * @param callable $comparator (T $a, T $b) -> int
+     * @return mixed|null Sequence<T> -> ?T
+     */
+    public function maxWith(callable $comparator);
+
+    /**
      * Returns a sequence containing all elements of original sequence except the given $elements.
      *
      * If the provided $elements is an Iterator, the resulting sequence will be constrained to being iterated
