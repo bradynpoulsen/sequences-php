@@ -360,6 +360,28 @@ interface Sequence extends IteratorAggregate
     public function indexOf($element): int;
 
     /**
+     * Returns index of the first element matching the given $predicate, or -1 if the sequence does not contain
+     * such element.
+     *
+     * @effect terminal
+     *
+     * @param callable $predicate (T) -> bool
+     * @return int Sequence<T> -> int
+     */
+    public function indexOfFirst(callable $predicate): int;
+
+    /**
+     * Returns index of the last element matching the given $predicate, or -1 if the sequence does not contain
+     * such element.
+     *
+     * @effect terminal
+     *
+     * @param callable $predicate (T) -> bool
+     * @return int Sequence<T> -> int
+     */
+    public function indexOfLast(callable $predicate): int;
+
+    /**
      * Returns the last element matching the given $predicate.
      *
      * @effect terminal

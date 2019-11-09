@@ -64,6 +64,37 @@ final class PredicateSearchingOperations
     }
 
     /**
+     * @see Sequence::indexOfFirst()
+     *
+     * @param callable $predicate (T) -> bool
+     */
+    public static function indexOfFirst(Sequence $source, callable $predicate): int
+    {
+        foreach ($source as $index => $element) {
+            if (call_user_func($predicate, $element)) {
+                return $index;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * @see Sequence::indexOfLast()
+     *
+     * @param callable $predicate (T) -> bool
+     */
+    public static function indexOfLast(Sequence $source, callable $predicate): int
+    {
+        $lastIndex = -1;
+        foreach ($source as $index => $element) {
+            if (call_user_func($predicate, $element)) {
+                $lastIndex = $index;
+            }
+        }
+        return $lastIndex;
+    }
+
+    /**
      * @see Sequence::last()
      *
      * @param callable|null $predicate (T) -> bool
