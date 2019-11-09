@@ -84,4 +84,20 @@ trait TerminalOperationsTrait
     {
         return PredicateMatchingOperations::none($this, $predicate);
     }
+
+    /**
+     * @see Sequence::sum()
+     */
+    public function sum()
+    {
+        return CalculatingOperations::sum($this);
+    }
+
+    /**
+     * @see Sequence::sumBy()
+     */
+    public function sumBy(callable $selector)
+    {
+        return CalculatingOperations::sumBy($this, $selector);
+    }
 }

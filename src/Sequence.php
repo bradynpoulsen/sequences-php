@@ -425,6 +425,25 @@ interface Sequence extends IteratorAggregate
     public function sortedWithDescending(callable $comparator): Sequence;
 
     /**
+     * Returns the sum of all elements in this sequence.
+     *
+     * @effect terminal
+     *
+     * @return int|float Sequence<T> -> int|float
+     */
+    public function sum();
+
+    /**
+     * Returns the sum of all values produced by $selector function applied to each element in this sequence.
+     *
+     * @effect terminal
+     *
+     * @param callable $selector (T) -> int|float
+     * @return int|float Sequence<T> -> int|float
+     */
+    public function sumBy(callable $selector);
+
+    /**
      * Returns a sequence containing first $count elements.
      *
      * @effect intermediate

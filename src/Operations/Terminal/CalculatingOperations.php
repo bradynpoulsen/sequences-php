@@ -51,6 +51,35 @@ final class CalculatingOperations
         return ($count > 0) ? $sum / $count : $sum;
     }
 
+    /**
+     * @see Sequence::sum()
+     */
+    public static function sum(Sequence $source)
+    {
+        $sum = 0;
+        foreach ($source->getIterator() as $element) {
+            self::validateNumber($element, "Element must be an integer or float");
+            $sum += $element;
+        }
+        return $sum;
+    }
+
+    /**
+     * @see Sequence::sumBy()
+     *
+     * @param callable $selector (T) -> int|float
+     */
+    public static function sumBy(Sequence $source, callable $selector)
+    {
+        $sum = 0;
+        foreach ($source->getIterator() as $element) {
+            $element = call_user_func($selector, $element);
+            self::validateNumber($element, "Selector must return an integer or float");
+            $sum += $element;
+        }
+        return $sum;
+    }
+
     private static function validateNumber($element, string $errorMessage): void
     {
         if (!is_integer($element) && !is_float($element)) {
