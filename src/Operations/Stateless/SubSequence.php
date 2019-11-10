@@ -41,7 +41,7 @@ final class SubSequence implements Sequence
             throw new InvalidArgumentException("startIndex must be non-negative, but was $startIndex");
         }
         if ($endIndexExclusive < 0) {
-            throw new InvalidArgumentException("startIndex must be non-negative, but was $endIndexExclusive");
+            throw new InvalidArgumentException("endIndexExclusive must be non-negative, but was $endIndexExclusive");
         }
         if ($endIndexExclusive <= $startIndex) {
             throw new InvalidArgumentException(
