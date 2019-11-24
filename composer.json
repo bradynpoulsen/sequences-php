@@ -21,6 +21,12 @@
             "src/builders.php"
         ]
     },
+    "autoload-dev": {
+        "psr-4": {
+            "BradynPoulsen\\Sequences\\": "tests/unit",
+            "IntegrationTests\\": "tests/integration"
+        }
+    },
     "scripts": {
         "test": "vendor/bin/phpunit",
         "unit": "vendor/bin/phpunit --testsuite unit",
