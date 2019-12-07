@@ -30,9 +30,6 @@ trait StatelessOperationsTrait
      */
     public function constrainOnce(): Sequence
     {
-        if ($this instanceof ConstrainedOnceSequence) {
-            return $this;
-        }
         return new ConstrainedOnceSequence($this);
     }
 

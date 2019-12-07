@@ -36,4 +36,9 @@ final class ConstrainedOnceSequence implements Sequence
         $this->previous = null;
         return $iterator;
     }
+
+    public function constrainOnce(): Sequence
+    {
+        return $this;
+    }
 }
