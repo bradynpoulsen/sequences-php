@@ -1,0 +1,17 @@
+name: Master Verify
+
+on: [push]
+
+jobs:
+    phpunit-tests:
+        if: github.ref == 'refs/heads/master'
+        name: PHPUnit Tests and Coverage
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@master
+            - run: composer install --prefer-dist --no-progress --no-suggest
+            - run: composer coverage-phpdbg
+            - uses: codecov/codecov-action@v1.0.5
+              with:
+                  token: 4b64ce16-86f8-48bd-b1ff-1e98d0697480
+                  file: build/coverage.clover.xml
