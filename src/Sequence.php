@@ -670,6 +670,22 @@ interface Sequence extends IteratorAggregate
     public function sortedWithDescending(callable $comparator): Sequence;
 
     /**
+     * Returns a sequence that advances $step elements between each yielded element of this sequence.
+     *
+     * @example
+     *
+     *      // sequence of: 1, 5, 21, 89
+     *      sequenceFrom('generate_fibonacci')->step(3)->take(4);
+     *
+     * @effect intermediate
+     * @effect stateful
+     *
+     * @param int $step the number of elements to step across between each yield
+     * @return Sequence Sequence<T> -> Sequence<T>
+     */
+    public function step(int $step): Sequence;
+
+    /**
      * Returns the sum of all elements in this sequence.
      *
      * @effect terminal

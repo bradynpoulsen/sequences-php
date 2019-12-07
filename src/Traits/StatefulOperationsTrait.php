@@ -13,6 +13,7 @@ use BradynPoulsen\Sequences\Operations\Stateful\{
     WindowedSequence
 };
 use BradynPoulsen\Sequences\Sequence;
+use InvalidArgumentException;
 use Iterator;
 use Traversable;
 
@@ -133,6 +134,26 @@ trait StatefulOperationsTrait
     }
 
     /**
+     * @see Sequence::step()
+     */
+    public function step(int $step): Sequence
+    {
+        if ($step < 0) {
+            throw new InvalidArgumentException('$step must be non-negative, but was ' . $step);
+        } elseif ($step === 0) {
+            return $this;
+        }
+        return $this->windowed(
+            1,
+            $step,
+            SequenceOptions::NO_PARTIAL_WINDOWS,
+            function (array $window): int {
+                return $window[0];
+            }
+        );
+    }
+
+    /**
      * @see Sequence::windowed()
      */
     public function windowed(
@@ -141,12 +162,7 @@ trait StatefulOperationsTrait
         bool $partialWindows = SequenceOptions::NO_PARTIAL_WINDOWS,
         ?callable $transform = null
     ): Sequence {
-        $sequence = new WindowedSequence(
-            $this,
-            $size,
-            $step,
-            $partialWindows
-        );
+        $sequence = new WindowedSequence($this, $size, $step, $partialWindows);
         return $transform !== null ? $sequence->map($transform) : $sequence;
     }
 }
