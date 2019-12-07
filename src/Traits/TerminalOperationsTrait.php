@@ -291,8 +291,8 @@ trait TerminalOperationsTrait
     /**
      * @see Sequence::toArray()
      */
-    public function toArray(): array
+    public function toArray(?callable $transform = null): array
     {
-        return iterator_to_array($this->getIterator());
+        return iterator_to_array(($transform !== null ? $this->map($transform) : $this)->getIterator());
     }
 }

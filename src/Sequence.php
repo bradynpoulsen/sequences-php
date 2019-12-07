@@ -730,9 +730,10 @@ interface Sequence extends IteratorAggregate
      *
      * @effect terminal
      *
+     * @param callable $transform (T $element[, int $index]) -> R
      * @return array
      */
-    public function toArray(): array;
+    public function toArray(?callable $transform = null): array;
 
     /**
      * Returns a sequence of results of applying the given $transform function to arrays that represent a window
