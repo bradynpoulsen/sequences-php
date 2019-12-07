@@ -70,9 +70,9 @@ final class SortingSequence implements Sequence
 
     public static function compareBy(callable $selector): callable
     {
-        return function ($a, $b) use ($selector): int {
-            $aKey = call_user_func($selector, $a);
-            $bKey = call_user_func($selector, $b);
+        return function ($first, $second) use ($selector): int {
+            $aKey = call_user_func($selector, $first);
+            $bKey = call_user_func($selector, $second);
             if ($aKey > $bKey) {
                 return 1;
             } elseif ($aKey < $bKey) {
@@ -84,8 +84,8 @@ final class SortingSequence implements Sequence
 
     private static function reverseComparator(callable $comparator): callable
     {
-        return function ($a, $b) use ($comparator): int {
-            return call_user_func($comparator, $b, $a);
+        return function ($first, $second) use ($comparator): int {
+            return call_user_func($comparator, $second, $first);
         };
     }
 }

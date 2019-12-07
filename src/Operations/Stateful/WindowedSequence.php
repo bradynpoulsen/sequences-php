@@ -13,6 +13,8 @@ use Generator;
 use InvalidArgumentException;
 use Traversable;
 
+use function count;
+
 /**
  * @internal
  */

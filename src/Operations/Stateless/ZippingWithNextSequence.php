@@ -31,8 +31,8 @@ final class ZippingWithNextSequence implements Sequence
     public function __construct(Sequence $previous, ?callable $transform = null)
     {
         $this->previous = $previous;
-        $this->transform = $transform ?? function ($a, $b): array {
-            return [$a, $b];
+        $this->transform = $transform ?? function ($first, $second): array {
+            return [$first, $second];
         };
     }
 

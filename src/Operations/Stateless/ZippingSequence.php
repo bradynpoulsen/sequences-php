@@ -37,8 +37,8 @@ final class ZippingSequence implements Sequence
     {
         $this->previous = $previous;
         $this->other = $other;
-        $this->transform = $transform ?? function ($a, $b): array {
-            return [$a, $b];
+        $this->transform = $transform ?? function ($first, $second): array {
+            return [$first, $second];
         };
     }
 

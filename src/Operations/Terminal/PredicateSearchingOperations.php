@@ -56,9 +56,12 @@ final class PredicateSearchingOperations
      */
     public static function firstOrNull(Sequence $source, ?callable $predicate = null)
     {
+        /**
+         * @SuppressWarnings("unused")
+         */
         try {
             return self::first($source, $predicate);
-        } catch (UnexpectedValueException $unexpectedValueException) {
+        } catch (UnexpectedValueException $missing) {
             return null;
         }
     }
@@ -120,9 +123,12 @@ final class PredicateSearchingOperations
      */
     public static function lastOrNull(Sequence $source, ?callable $predicate = null)
     {
+        /**
+         * @SuppressWarnings("unused")
+         */
         try {
             return self::last($source, $predicate);
-        } catch (UnexpectedValueException $unexpectedValueException) {
+        } catch (UnexpectedValueException $missing) {
             return null;
         }
     }
@@ -156,7 +162,7 @@ final class PredicateSearchingOperations
     {
         try {
             return self::single($source, $predicate);
-        } catch (OverflowException|UnexpectedValueException $exception) {
+        } catch (OverflowException | UnexpectedValueException $exception) {
             return null;
         }
     }
