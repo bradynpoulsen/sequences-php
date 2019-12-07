@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace BradynPoulsen\Sequences\Operations\Stateless;
 
 use BradynPoulsen\Sequences\DeferredIterator;
+use BradynPoulsen\Sequences\Iteration\Iteration;
+use BradynPoulsen\Sequences\Iteration\Iterations;
 use BradynPoulsen\Sequences\Sequence;
 use BradynPoulsen\Sequences\Traits\CommonOperationsTrait;
-use Generator;
 use InvalidArgumentException;
 use Traversable;
 
@@ -42,15 +43,13 @@ final class DropSequence implements Sequence
 
     public function getIterator(): Traversable
     {
-        return new DeferredIterator(function (): Generator {
+        return new DeferredIterator(function (): Iteration {
             $left = $this->count;
-            foreach ($this->previous->getIterator() as $element) {
-                if ($left > 0) {
-                    $left--;
-                    continue;
-                }
-                yield $element;
+            $iteration = Iterations::fromTraversable($this->previous->getIterator());
+            while ($iteration->hasNext() && $left > 0) {
+                $iteration->pluckNext();
             }
+            return $iteration;
         });
     }
 

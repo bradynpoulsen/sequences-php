@@ -40,7 +40,6 @@ final class IteratorIteration extends AbstractIteration
             return;
         }
 
-        $this->source = null;
         $this->close();
     }
 
