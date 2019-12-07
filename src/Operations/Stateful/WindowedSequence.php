@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BradynPoulsen\Sequences\Operations\Stateful;
 
-use BradynPoulsen\Sequences\DeferredIterator;
+use BradynPoulsen\Sequences\Operations\DeferredIterator;
 use BradynPoulsen\Sequences\Iteration\Iteration;
 use BradynPoulsen\Sequences\Iteration\Iterations;
 use BradynPoulsen\Sequences\Sequence;
