@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ruleset>
+    <!-- Verify PHP source code -->
     <file>src/</file>
+
+    <!-- Follow the PSR-12 code style published by the PHP-FIG -->
     <rule ref="PSR12" />
+
+    <!-- Ensure that PHP 7.2 compatibility is maintained -->
+    <rule ref="PHPCompatibility">
+        <config name="testVersion" value="7.2-" />
+    </rule>
 </ruleset>
