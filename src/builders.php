@@ -19,7 +19,7 @@ use IteratorAggregate;
  */
 function emptySequence(): Sequence
 {
-    return new EmptySequence();
+    return EmptySequence::get();
 }
 
 /**
