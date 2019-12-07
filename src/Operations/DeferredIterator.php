@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BradynPoulsen\Sequences;
+namespace BradynPoulsen\Sequences\Operations;
 
 use Iterator;
 
