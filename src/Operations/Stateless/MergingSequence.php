@@ -6,6 +6,7 @@ namespace BradynPoulsen\Sequences\Operations\Stateless;
 
 use BradynPoulsen\Sequences\DeferredIterator;
 use BradynPoulsen\Sequences\Sequence;
+use BradynPoulsen\Sequences\Traits\CommonOperationsTrait;
 use Generator;
 use Traversable;
 
@@ -14,6 +15,8 @@ use Traversable;
  */
 final class MergingSequence implements Sequence
 {
+    use CommonOperationsTrait;
+
     /**
      * @var Sequence
      */
