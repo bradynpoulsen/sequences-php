@@ -1,0 +1,32 @@
+name: Pull Requests
+
+on: [pull_request]
+
+jobs:
+    php-code-style:
+        name: PHP Code Style
+        runs-on: ubuntu-latest
+        container:
+            image: composer:latest
+        steps:
+            - uses: actions/checkout@master
+            - run: composer install --prefer-dist --no-progress --no-suggest
+            - run: composer cs
+    php-mess-detector:
+        name: PHP Mess Detector
+        runs-on: ubuntu-latest
+        container:
+            image: composer:latest
+        steps:
+            - uses: actions/checkout@master
+            - run: composer install --prefer-dist --no-progress --no-suggest
+            - run: composer md
+    phpunit-tests:
+        name: PHPUnit Tests
+        runs-on: ubuntu-latest
+        container:
+            image: composer:latest
+        steps:
+            - uses: actions/checkout@master
+            - run: composer install --prefer-dist --no-progress --no-suggest
+            - run: composer test
