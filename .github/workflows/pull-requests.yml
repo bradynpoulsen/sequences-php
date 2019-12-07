@@ -6,8 +6,6 @@ jobs:
     php-code-style:
         name: PHP Code Style
         runs-on: ubuntu-latest
-        container:
-            image: composer:latest
         steps:
             - uses: actions/checkout@master
             - run: composer install --prefer-dist --no-progress --no-suggest
@@ -15,8 +13,6 @@ jobs:
     php-mess-detector:
         name: PHP Mess Detector
         runs-on: ubuntu-latest
-        container:
-            image: composer:latest
         steps:
             - uses: actions/checkout@master
             - run: composer install --prefer-dist --no-progress --no-suggest
@@ -24,9 +20,11 @@ jobs:
     phpunit-tests:
         name: PHPUnit Tests
         runs-on: ubuntu-latest
-        container:
-            image: composer:latest
         steps:
             - uses: actions/checkout@master
             - run: composer install --prefer-dist --no-progress --no-suggest
-            - run: composer test
+            - run: composer coverage-phpdbg
+            - uses: codecov/codecov-action@v1.0.5
+              with:
+                  token: 4b64ce16-86f8-48bd-b1ff-1e98d0697480
+                  file: build/coverage.clover.xml
